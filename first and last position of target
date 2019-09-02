@@ -4,7 +4,7 @@ class Solution {
         //first position 
         int left = 0;
         int right = nums.length - 1;
-        int[] res = new int[] {-1, -1};
+        int[] res = new int[] {-1, -1};  //how to new a int array, remember to use the { }
         while(left + 1 < right){
             int mid = left + (right - left) / 2;
             if(nums[mid] < target) left = mid;
@@ -29,7 +29,7 @@ class Solution {
 //better, cleaner version 
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        if(nums == null || nums.length == 0) return new int[] {-1, -1};
+        if(nums == null || nums.length == 0) return new int[] {-1, -1};  //how to return a new int array without declaration
         return new int[] {first(nums, target), last(nums, target)};
     }
     private int first(int[] nums, int target){
@@ -59,4 +59,6 @@ class Solution {
 
 //Using Binary Search. #3
 //the first position part could re-use the first bad version code. 
-//For the last position part, the code does not have a lot of change. I only changed the line 52, the condition of the if-else //chunk. Cause we need to search the last position, so we need to move right-ward to skip all the target in the front.
+//For the last position part, the code does not have a lot of change. I only changed the line 52, the condition of the if-else 
+//chunk. Cause we need to search the last position, so we need to move right-ward to skip all the target in the front.
+//n
