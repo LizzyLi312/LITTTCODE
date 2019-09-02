@@ -1,4 +1,4 @@
-# l278
+# LITTTCODE
 Binary Search
 
 Hello, world!!! :) I'm Li Zi Yi. Call me Lizzy if it's hard for you to pronounce that. 
