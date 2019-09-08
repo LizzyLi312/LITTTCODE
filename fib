@@ -1,0 +1,11 @@
+class Solution {
+    public int fib(int N) {
+        if(N == 0) return 0;
+        if(N == 1) return 1;
+        else
+            return (fib(N - 2) + fib(N - 1));
+    }
+}
+
+//time: 1 + 2 + 4 + ... + 2^(n-1) = 2^n
+//could use dp here to optimize the storage space
