@@ -1,3 +1,4 @@
+//recursion which could cause time exceed aka stackoverflow
 class Solution {
     public int fib(int N) {
         if(N == 0) return 0;
@@ -7,5 +8,23 @@ class Solution {
     }
 }
 
-//time: 1 + 2 + 4 + ... + 2^(n-1) = 2^n
+//time: 1 + 2 + 4 + ... + 2^(n-1) = O(2^n)  space: O(1) 
 //could use dp here to optimize the storage space
+//keep 2 variable
+class Solution {
+    public int fib(int N) {
+        if(N < 2) return N;
+        int count = 0;
+        int ppre = 0;
+        int pre = 1;
+        int sum = 0;
+        while(count + 2 <= N){
+            sum = ppre + pre;
+            ppre = pre;
+            pre = sum;
+            count++;
+        }
+        return sum;
+    }
+}
+//time: O(n)    Space: O(1)
