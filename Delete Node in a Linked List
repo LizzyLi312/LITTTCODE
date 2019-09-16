@@ -5,3 +5,6 @@ class Solution {
         node.next = node.next.next;
     }
 }
+
+//remove the node, but you dont know the head
+//so assign the value to remove it 
