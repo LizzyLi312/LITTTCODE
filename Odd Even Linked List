@@ -18,3 +18,5 @@ class Solution {
 //find the 2 new head, and cache them
 //connect the next odd/even one first and then move the pointer to the next one
 //the pointer stays on the new linked list, not the old order list 
+
+//Or using dummy node to create 2 linked lists: odd list & even list
