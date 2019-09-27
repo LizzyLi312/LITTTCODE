@@ -17,7 +17,7 @@ class Solution {
         }
         ListNode temp = slow.next;
         slow.next = null;  //cut it here
-        return temp;
+        return temp;  
     }
     //reverse Linked List
     private ListNode reverse(ListNode node){
