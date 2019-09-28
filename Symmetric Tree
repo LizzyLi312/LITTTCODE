@@ -10,3 +10,5 @@ class Solution {
         return (isSymmetric(node1.left, node2.right) && isSymmetric(node1.right, node2.left));
     }
 }
+
+//3 cases: if both nodes are null / if one of them is null / none of them is none 
