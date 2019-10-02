@@ -7,3 +7,5 @@ class Solution {
         return searchBST(root, val);  //return recursion!
     }
 }
+
+//time: O(n)
