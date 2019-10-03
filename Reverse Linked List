@@ -18,7 +18,7 @@ class Solution {
 //recursion
 public ListNode reverse(ListNode head) {
 	if (head == null || head.next == null) return head;
-	ListNode newHead = reverse(head.next); //recursive from the end to the beginning
+	ListNode newHead = reverse(head.next); //recursive from the end to the beginning; the next should be the new next!
 	reverse(head);
 	head.next.next = head;
 	head.next = null;
