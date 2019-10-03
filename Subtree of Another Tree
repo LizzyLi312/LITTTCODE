@@ -11,3 +11,6 @@ class Solution {
         return isSameTree(left.left, right.left) && isSameTree(left.right, right.right);
     }
 }
+
+//m: nodes in tree s; n: nodes in tree t
+//time: worst case: O(m*n) general case: O(m) 
