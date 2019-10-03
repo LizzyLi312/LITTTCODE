@@ -18,11 +18,11 @@ class Solution {
 //recursion
 public ListNode reverse(ListNode head) {
 	if (head == null || head.next == null) return head;
-	ListNode newHead = reverse(head.next); 
+	ListNode newHead = reverse(head.next); //recursive from the end to the beginning
 	reverse(head);
 	head.next.next = head;
 	head.next = null;
-	return newHead;
+	return newHead;  //the final result, always not be changed
 }
 
 //newHead: the last one always return the new head 
