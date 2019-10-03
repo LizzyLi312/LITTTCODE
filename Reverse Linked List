@@ -24,3 +24,5 @@ public ListNode reverse(ListNode head) {
 	head.next = null;
 	return newHead;
 }
+
+//newHead: the last one always return the new head 
