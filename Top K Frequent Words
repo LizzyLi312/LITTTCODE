@@ -6,7 +6,7 @@ class Solution {
         for(String word : words){
             // if(!map.containsKey(word)) map.put(word, 1);
             // else map.put(word, map.get(word) + 1);
-            map.put(word, map.getOrDefault(word, 0) + 1);  //both work
+            map.put(word, map.getOrDefault(word, 0) + 1);  //both work, Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key
         }
         Queue<String> heap = new PriorityQueue<>(k, new Comparator<String>(){ //override comparator
             @Override
