@@ -34,3 +34,4 @@ class Solution {
 
 //Using max heap to get better time and bfs to traverse 
 //time: O(n) space: O(m*n) (visited matrix)
+//instead use matrix, we could use hashset to reduce space
