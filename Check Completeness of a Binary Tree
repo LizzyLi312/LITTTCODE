@@ -15,6 +15,26 @@ class Solution {
             else flag = true;
         }
         return true;
+        
+        //s2: check before 
+        if(root == null) return true;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        boolean flag = false;
+        while(!que.isEmpty()){
+            TreeNode temp = que.poll();
+            if(temp.left != null){
+                if(flag == true) return false;
+                else que.offer(temp.left);
+            }
+            else flag = true;
+            if(temp.right != null){
+                if(flag == true) return false;
+                else que.offer(temp.right);
+            }
+            else flag = true;
+        }
+        return true;
     }
 }
 
