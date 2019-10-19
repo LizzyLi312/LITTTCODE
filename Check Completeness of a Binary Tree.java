@@ -38,4 +38,5 @@ class Solution {
     }
 }
 
+//recursion works too
 //using level order traversal to traversal tree. bc it traverse left first so when it is null the flag will turn to true and end while loop
