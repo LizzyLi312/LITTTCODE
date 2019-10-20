@@ -41,3 +41,4 @@ class Solution {
 }
 
 //need to use dummy node. otherwise it will throw nullpointerexception
+//if the range is (n,m). then you need to keep the #n-1 node and #node
