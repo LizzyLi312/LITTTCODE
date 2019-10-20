@@ -18,5 +18,6 @@ class Solution {
             sol.remove(sol.size() - 1);
         }
     }
-
 }
+
+//allow the element be used multiple times, so no need to add level number when call the recursion loop
