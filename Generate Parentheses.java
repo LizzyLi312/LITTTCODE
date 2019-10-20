@@ -14,12 +14,14 @@ class Solution {
         if(l < n){
             sb.append('(');
             dfs(n, l + 1, r, sb, res);
-            sb.deleteCharAt(sb.length() - 1);
+            sb.deleteCharAt(sb.length() - 1);  //only delete (
         }
         if(r < l){
             sb.append(')');
             dfs(n, l, r + 1, sb, res);
-            sb.deleteCharAt(sb.length() - 1);
+            sb.deleteCharAt(sb.length() - 1);  //only delete )
         }
     }
 }
+//using dfs. 2n layers: 2n positions and 2 branches: adding ( or adding )
+//time: summation from 2 power of 0 to 2 power of 2n - 1
