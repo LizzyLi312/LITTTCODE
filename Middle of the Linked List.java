@@ -1,11 +1,3 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 class Solution {
     public ListNode middleNode(ListNode head) {
         if(head == null || head.next == null) return head;
@@ -19,3 +11,5 @@ class Solution {
         else return slow.next;
     }
 }
+//if you wanna find the 1/3 point position in the linked list
+//let fast move 3 steps while slow move one step each time
