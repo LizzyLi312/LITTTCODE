@@ -3,15 +3,15 @@ class Solution {
         if(points == null || points.length == 0 || points[0] == null || points[0].length == 0) return 0;
         if(points.length <= 2) return points.length;
         int globalMax = 0;
-        for(int i = 0; i < points.length - 1; i++){
+        for(int i = 0; i < points.length - 1; i++){  //visit each node 
             Map<String, Integer> map = new HashMap<>();  //use String to rep slope could make avoid the problem that caused by the precision of double
             int overlap = 0;
             int max = 0;
-            for(int j = i + 1; j < points.length; j++){
+            for(int j = i + 1; j < points.length; j++){  //visit the remaining node and calculate slope. Use HashMap to store the times
                 int x = points[i][0] - points[j][0];
                 int y = points[i][1] - points[j][1];
                 if( x == 0 && y == 0){
-                    overlap++;
+                    overlap++;  //the same point
                     continue;
                 }
                 int gcd = gcd(x, y);  //get the great common divisor for x and y
@@ -32,3 +32,5 @@ class Solution {
         return gcd(y, x % y);
     }
 }
+
+//time: O(n^2) could be better: if the amount of remaining points is smaller than globalMax, then stop loop and return
