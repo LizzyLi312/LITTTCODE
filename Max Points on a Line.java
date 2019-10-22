@@ -10,7 +10,7 @@ class Solution {
             for(int j = i + 1; j < points.length; j++){  //visit the remaining node and calculate slope. Use HashMap to store the times
                 int x = points[i][0] - points[j][0];
                 int y = points[i][1] - points[j][1];
-                if( x == 0 && y == 0){
+                if( x == 0 && y == 0){  //corner case need to be considered 
                     overlap++;  //the same point
                     continue;
                 }
