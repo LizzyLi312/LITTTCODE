@@ -8,7 +8,7 @@ class Solution {
             dp[i] = 1;
             for(int j = 0; j < i; j++){  //this loop starts when i > j! so the nums[i] is ahead of nums[j]
                 if(nums[i] > nums[j]){
-                    dp[i] = Math.max(dp[i], dp[j] + 1);  //update dp[i]
+                    dp[i] = Math.max(dp[i], dp[j] + 1);  //update dp[i]. In tnis way we can find all the nums that are smaller than nums[j]
                     max = Math.max(dp[i], max);
                 }
             }
