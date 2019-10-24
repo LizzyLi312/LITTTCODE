@@ -28,3 +28,5 @@ class Solution {
         return res;
     }
 }
+//if the input is big data / streaming flow: using map reduce
+//input → split → map → shuffle → reduce → output
