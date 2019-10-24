@@ -45,7 +45,7 @@ class Solution {
         else return (nums[right] == target) ? right : -1;
     }
     private int last(int[] nums, int target){
-          int left2 = 0;
+        int left2 = 0;
         int right2 = nums.length - 1;
         while(left2 + 1 < right2){
             int mid2 = left2 + (right2 - left2) / 2;
