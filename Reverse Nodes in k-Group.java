@@ -1,11 +1,3 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         //check corner case, need to cache head and k since you don't want them to be changed 
