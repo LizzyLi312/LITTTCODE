@@ -17,7 +17,7 @@ class Solution {
                         cc[i] = c; 
                         String str = String.valueOf(cc);
                         if(c != temp && wordSet.contains(str)){
-                            if(str.equals(endWord)) return minDis + 1;
+                            if(str.equals(endWord)) return minDis + 1;  //when meet the end word for the first time, return the distance immediately
                             queue.offer(str);
                             wordSet.remove(str);
                         }                           
