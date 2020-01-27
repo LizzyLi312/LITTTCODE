@@ -22,7 +22,7 @@ class Solution {
                             wordSet.remove(str);
                         }                           
                     }
-                    cc[i] = temp;
+                    cc[i] = temp;  //set the word back to normal 
                 }
             }
             minDis++;
