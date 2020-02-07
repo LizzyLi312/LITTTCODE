@@ -2,7 +2,7 @@ class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> res = new LinkedList<>();
         if(nums == null) return res;
-        res.add(new ArrayList<>());
+        res.add(new ArrayList<>());  //a null set should be in the result too
         dfs(res, nums, 0, new ArrayList<Integer>());
         return res;
     }
@@ -12,7 +12,7 @@ class Solution {
             list.add(nums[i]);
             result.add(new ArrayList<>(list));
             dfs(result, nums, i + 1, list);
-            list.remove(list.size() - 1);
+            list.remove(list.size() - 1);  //backtracing
         }
         return;
     }
