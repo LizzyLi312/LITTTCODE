@@ -16,7 +16,7 @@ class Solution {
         }
         for(int i = level; i < nums.length; i++){
             swap(nums, i, level);
-            dfs(nums, level + 1, res);
+            dfs(nums, level + 1, res);  //should be level + 1 bc 
             swap(nums, i, level);
         }
     }
