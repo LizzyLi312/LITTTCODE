@@ -1,7 +1,7 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         if(s == null || s.length() == 0 || wordDict == null ||wordDict.size() == 0) return false;
-        Boolean[] memo = new Boolean[s.length()];
+        Boolean[] memo = new Boolean[s.length()];  //pruning to save time
         return dfs(s, wordDict, 0, memo);
     }
     private boolean dfs(String s, List<String> wordDict, int idx, Boolean[] memo){
