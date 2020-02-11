@@ -16,7 +16,7 @@ class Solution {
                 } 
             }
         }
-        memo[idx] = false;
+        memo[idx] = false;  //if it didnt return true then return false
         return memo[idx];
     }
 }
