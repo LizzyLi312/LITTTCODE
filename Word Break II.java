@@ -18,7 +18,7 @@ class Solution {
             String str = s.substring(idx, i);
             if(wordDict.contains(str) && memo[i]){
                 int prevLen = sol.length();
-                if(prevLen == 0) sol.append(str);
+                if(prevLen == 0) sol.append(str);  //avoid the extra space 
                 else sol.append(" " + str);
                 dfs(s, wordDict, res, i, sol, memo);
                 sol.setLength(prevLen);
