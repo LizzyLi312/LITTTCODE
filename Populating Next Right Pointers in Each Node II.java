@@ -18,6 +18,7 @@ class Node {
 */
 class Solution {
     //goal: link nodes in the same layer 
+    //using 2 pointers to record the position of the parents node and the child node which should be connected
     public Node connect(Node root) {
         if(root == null) return root;
         Node head = null;  //head node of next level, to cache a position 
