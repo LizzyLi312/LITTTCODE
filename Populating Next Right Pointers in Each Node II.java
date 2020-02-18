@@ -23,13 +23,13 @@ class Solution {
         if(root == null) return root;
         Node head = null;  //head node of next level, to cache a position 
         Node cur = root;  //the null after each layer is connected to the last node automatically 
-        Node prev = null;  //prev node of next level
+        Node prev = null;  //prev node of next level, link the new node aftet it 
         while(cur != null){  //make sure it goes thru the whole thing.
             while(cur!= null){  //each layer
                 if(cur.left != null){
-                    if(prev == null) head = cur.left;
+                    if(prev == null) head = cur.left;  //if prev is null means it is a new layer need to be done
                     else prev.next = cur.left;
-                    prev = cur.left;
+                    prev = cur.left;  //update position
                 }
                 if(cur.right != null){
                     if(prev == null) head = cur.right;
