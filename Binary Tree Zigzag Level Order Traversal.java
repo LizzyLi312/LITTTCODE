@@ -11,7 +11,7 @@ class Solution {
             while(size-- > 0){
                 TreeNode temp = que.poll();
                 if(count % 2 == 0)  //tell the even and odd here
-                    res.add(0, temp.val);
+                    res.add(0, temp.val);  //reverse linkedlist
                 else 
                     res.add(temp.val);
                 if(temp.left != null) que.offer(temp.left);  //do not tell the even and odd here
