@@ -36,7 +36,7 @@ class Solution {
                     else prev.next = cur.right;
                     prev = cur.right;
                 }
-                cur = cur.next;  //to the next parents node(last layer )
+                cur = cur.next;  //to the next parents node at the last leayer 
             }
             cur = head;  //on to the next layer
             head = null;
@@ -47,3 +47,4 @@ class Solution {
 }
 
 //BFS
+//do not need a que to store the node 
