@@ -26,8 +26,8 @@ class Solution {
         Node prev = null;  //prev node of next level, link the new node aftet it 
         while(cur != null){  //make sure it goes thru the whole thing.
             while(cur!= null){  //each layer
-                if(cur.left != null){
-                    if(prev == null) head = cur.left;  //if prev is null means it is a new layer need to be done
+                if(cur.left != null){ 
+                    if(prev == null) head = cur.left;  //if prev is null means it is a new layer need to be done, i.e. it is the begining
                     else prev.next = cur.left;
                     prev = cur.left;  //update position
                 }
