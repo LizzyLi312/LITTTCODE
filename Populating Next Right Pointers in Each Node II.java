@@ -21,7 +21,7 @@ class Solution {
     //using 2 pointers to record the position of the parents node and the child node which should be connected
     public Node connect(Node root) {
         if(root == null) return root;
-        Node head = null;  //head node of next level, to cache a position 
+        Node head = null;  //head node of next level, to cache a position. so we can go to the next level
         Node cur = root;  //the null after each layer is connected to the last node automatically 
         Node prev = null;  //prev node of next level, link the new node aftet it 
         while(cur != null){  //make sure it goes thru the whole thing.
