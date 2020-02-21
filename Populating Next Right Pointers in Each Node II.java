@@ -25,16 +25,16 @@ class Solution {
         Node cur = root;  //the null after each layer is connected to the last node automatically 
         Node prev = null;  //prev node of next level, link the new node aftet it 
         while(cur != null){  //make sure it goes thru the whole thing.
-            while(cur!= null){  //each layer
+            while(cur!= null){  //each layer, need to check whether it is a new layer or not 
                 if(cur.left != null){ 
                     if(prev == null) head = cur.left;  //if prev is null means it is a new layer need to be done, i.e. it is the begining
                     else prev.next = cur.left;
                     prev = cur.left;  //update position
                 }
                 if(cur.right != null){
-                    if(prev == null) head = cur.right;
+                    if(prev == null) head = cur.right; 
                     else prev.next = cur.right;
-                    prev = cur.right;
+                    prev = cur.right;  // cannot be prev = prev.next since when prev == null it would throw NullPointerException
                 }
                 cur = cur.next;  //to the next parents node at the last leayer 
             }
