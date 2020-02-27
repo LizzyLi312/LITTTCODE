@@ -1,5 +1,5 @@
 class Solution {
-    private int res = 0;
+    private int res = Integer.MIN_VALUE;  //otherwise the coner case like: [-3] would not work 
     public int maxPathSum(TreeNode root) {
         helper(root);
         return res;
@@ -14,3 +14,5 @@ class Solution {
         return val;  //return the max route to the prev node
     }
 }
+
+//should clarify: negtative or positive?
