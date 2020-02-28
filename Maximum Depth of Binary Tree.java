@@ -8,3 +8,5 @@ class Solution {
 }
 
 //time: O(2^logn) = O(n)
+
+//Or BFS 
