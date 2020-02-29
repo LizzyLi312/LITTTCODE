@@ -11,7 +11,7 @@ class Solution {
         if(root == null) return 0;
         int left = getHeight(root.left);
         int right = getHeight(root.right);
-        return Math.max(left, right) + 1;
+        return Math.max(left, right) + 1;  //need the maximum length
     }
 }
 
