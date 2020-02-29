@@ -9,4 +9,6 @@ class Solution {
     }
 }
 
-//if you want to copy the entire code of the max path, it couldn't work. Cause it has a corner case which is the root only has left subtree or right subtree
+//if you want to copy the entire code of the max path, it couldn't work. 
+//Cause it has a corner case:[1, 2]. only has one child
+
