@@ -3,7 +3,7 @@ class Solution {
     public List<Integer> findAnagrams(String s, String p) {  //size: m, n
         List<Integer> res = new ArrayList<>();
         if(s == null || p == null) return res;
-        for(int i = 0; i <= s.length() - p.length(); i++){ //time: m - n
+        for(int i = 0; i <= s.length() - p.length(); i++){ //time: m - n; compare from 0 to m - n
             if(checkPattern(s.substring(i, i + p.length()), p)) res.add(i);  //substring time complexity: O(n) since the substring length is p.length()
         }
         return res;
