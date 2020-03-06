@@ -1,3 +1,4 @@
+//in the searching process the left parenthese can be more than the right ones since you can add the right ones
 class Solution {
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
@@ -25,3 +26,24 @@ class Solution {
 }
 //using dfs. 2n layers: 2n positions and 2 branches: adding ( or adding )
 //time: summation from 2 power of 0 to 2 power of 2n - 1
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        dfs(n, res, new StringBuilder(), 0);  //diff = leftP - rightP
+        return res;
+    }
+    private void dfs(int n, List<String> res, StringBuilder sol, int diff){
+        if(sol.length() == 2 * n && diff == 0){
+            res.add(sol.toString());
+            return;
+        }
+        if(diff < 0 || sol.length() > 2 * n) return;
+        sol.append('(');
+        dfs(n, res, sol, diff + 1);
+        sol.setLength(sol.length() - 1);
+        sol.append(')');
+        dfs(n, res, sol, diff - 1);
+        sol.setLength(sol.length() - 1);
+    }
+}
