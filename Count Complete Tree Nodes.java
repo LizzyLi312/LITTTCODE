@@ -18,7 +18,7 @@ class Solution {
     }
 }
 
-//maths solution
+//maths solution, time: O((logn)^2)
 class Solution {
     public int countNodes(TreeNode root) {
         if(root == null) return 0;
