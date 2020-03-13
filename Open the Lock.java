@@ -1,3 +1,4 @@
+//find the shortest path from "0000" to target -> BFS
 class Solution {
     public int openLock(String[] deadends, String target) {
         HashSet<String> set = new HashSet<>();
@@ -26,15 +27,15 @@ class Solution {
         }
         return -1;
     }
-    private List<char[]> convert(char[] cs, HashSet<String> set, HashSet<String> visited){
+    private List<char[]> convert(char[] cs, HashSet<String> set, HashSet<String> visited){ //find the next lock comnination
         List<char[]> res = new ArrayList<>();
         for(int i = 0; i < cs.length; i++){
-            char tmp = cs[i];
+            char tmp = cs[i];  //need to be cached
             // +1 combo
             if(tmp == '9') cs[i] = '0';
             else cs[i] = (char) (tmp + 1);
             String str = String.valueOf(cs);
-            if(!set.contains(str) && !visited.contains(str)) res.add(cs.clone());
+            if(!set.contains(str) && !visited.contains(str)) res.add(cs.clone()); //need deep copy
             // -1 combo
             if(tmp == '0') cs[i] = '9';
             else cs[i] = (char) (tmp - 1);
