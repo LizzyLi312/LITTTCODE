@@ -1,3 +1,4 @@
+//dfs: where to cut, 3 times 
 class Solution {
     public List<String> restoreIpAddresses(String s) {
         List<String> res = new ArrayList<>();
@@ -14,7 +15,7 @@ class Solution {
             return;
         }
         int len = sol.length();
-        for(int l = 1; l <= 3; l++){
+        for(int l = 1; l <= 3; l++){ //the length could be 1 or 2 or 3
             if(idx + l > s.length()) break; 
             int val = Integer.valueOf(s.substring(idx, idx + l)); //cache the value
             if(val <= 255){
