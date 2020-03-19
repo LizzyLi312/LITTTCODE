@@ -18,7 +18,9 @@ class Solution {
         else{  //if there is '*' in p
             int i = idxS - 1;  //can be knew after the variable's value in dfs determined. since we need to start from idxS. So the while loop need to add an condition i < idxS
             while(i < lenS && (i < idxS || p.charAt(idxP) == '.' || p.charAt(idxP) == s.charAt(i))){ //need while loop since we do not know how many letters in s could be matched 
-                if(dfs(s, p, i + 1, idxP + 2)) return true;  //next step: match(i+1, idxP+2) since idxP is a non '*'letter and idxP+1 is a '*' letter.so next one should be the one after these two.
+                //next step: match(i+1, idxP+2) since idxP is a non '*'letter and idxP+1 is a '*' letter.so next one should be the one after these two.
+                //why i + 1? since we need to start matching from the min length of string it can match which is 0
+                if(dfs(s, p, i + 1, idxP + 2)) return true;  
                 i++;
             }
             return false;
