@@ -5,7 +5,7 @@ class Solution {
     }
     private TreeNode build(int[] in, int i_begin, int i_end, int[] po, int p_begin, int p_end){
         //preorder to construct tree
-        if(i_begin > i_end) return null;
+        if(i_begin > i_end) return null; // i is getting smaller 
         int val = po[p_end];
         TreeNode root = new TreeNode(val);
         int i = 0;
