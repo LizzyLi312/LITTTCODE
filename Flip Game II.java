@@ -27,3 +27,24 @@ public class FlipGame2 {
         System.out.println(canWin("+++++"));
     }
 }
+//with pruning 
+    private static boolean dfs(char[] s, HashMap<String, Boolean> map) {
+        String temp = new String(s);
+        if(map.containsKey(temp)) return map.get(temp);
+        for (int i = 0; i + 1 < s.length; i++) {
+            if (s[i] == '+' && s[i + 1] == '+') {
+                s[i] = '-';
+                s[i + 1] = '-';
+                boolean res = dfs(s, map);
+                s[i] = '+';
+                s[i + 1] = '+';
+                if(!res){
+                    map.put(new String(temp), true);
+                    return true;
+                }
+            }
+        }
+        map.put(new String(temp), false);
+        return false;
+    }
+
