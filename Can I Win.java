@@ -1,4 +1,5 @@
 //choose the number or not 
+//use pruning to save time
 class Solution {
     public boolean canIWin(int maxChoosableInteger, int desiredTotal) {
         if(maxChoosableInteger <= 0 || maxChoosableInteger > 20 || desiredTotal < 0) return false;
@@ -12,7 +13,10 @@ class Solution {
         for(int i = 1; i <= max; i++){
             int mask = 1 << (i - 1);  //to check the number is avialible
             if((mask & map) != 0){ 
-                if(sum + i >= target) return true;
+                if(sum + i >= target){
+                    memo[map] = true;
+                    return true; 
+                }
                 int newMap = map - mask;
                 if(!dfs(newMap, max, target, sum + i)) return true;  //player 2
             }
