@@ -42,7 +42,7 @@ class Solution {
     private String build(String board, int left, int right){
         int len = board.length();
         while(left >= 0 && right < len){
-            char c = board.charAt(left);
+            char c = board.charAt(left); //to see after remove balls([i, i + 1]) the rest can remove by themselves or not
             int count = 0;
             int l = left;
             //left records the first different element from c
