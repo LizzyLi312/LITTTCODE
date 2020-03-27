@@ -7,6 +7,7 @@ class Solution {
                 if(j == 0){
                     buy[i][0] = -prices[j];
                     continue;
+                    //do not need to give value to sell since the intial value is 0 and it should be 0 too
                 }
                 sell[i][j] = Math.max(sell[i][j-1], buy[i][j - 1] + prices[j]);  
                 buy[i][j] = Math.max(buy[i][j - 1], sell[i - 1][j - 1]-prices[j]); //buy i shoud be after i - 1 transaction 
