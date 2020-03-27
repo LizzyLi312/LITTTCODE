@@ -12,3 +12,5 @@ class Solution {
         return sell2;
     }
 }
+
+//time: O(2n)
