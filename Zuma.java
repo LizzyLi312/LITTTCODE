@@ -75,3 +75,4 @@ class Solution {
         return sb.toString(); 
     }
 }
+//time: O(2^n) n balls 2 option: remove or not 
