@@ -14,7 +14,7 @@ class Solution {
                 return memo[idxS][idxP];
             }
             else{
-                memo[idxS][idxP] = false;  //?
+                memo[idxS][idxP] = false;  //when it is not * but other case. e.g. idxS >= s.length() or s.charAt(idxS) != p.charAt(idxP)
                 return false;
             }
         }
