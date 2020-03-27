@@ -20,6 +20,7 @@ class Solution {
 time: O(n^2)
 
 //using pruning. otherwise it would be Time Limit Exceeded error
+//total ways = ways(0, n - 1)(m1) + (ways(0, n - 2)(m1)) if prev is in the range 
  public int numDecodings(String s) {
         if(s == null || s.length() == 0) return 0;
         int m1 = 1, m2 = 0; 
@@ -36,4 +37,4 @@ time: O(n^2)
         }
         return m2;
  }
- //time: O(n);
+ //time: O(n) 
