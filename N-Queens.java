@@ -28,7 +28,7 @@ class Solution {
         for(int i = 0; i < matrix.length; i++){  //by row
             for(int j = 0; j < index; j++){  //by col
                 if(matrix[i][j] == 'Q' && (row + j == index + i || row == i || index + row == i + j)) 
-                  //3 cases: ||  || same place
+                  //3 cases:  left up diagonal || at the same row || right up diagonal
                   return false;
             }
         }
