@@ -11,8 +11,8 @@ class Solution {
         for(int i = 0; i < lenT; i++){
             for(int j = i; j < lenS; j++){
                 char tc = t.charAt(i), sc = s.charAt(j);
-                if(tc != sc) memo[i +1][j+1] = memo[i +1][j]; 
-                else memo[i + 1][j + 1] = memo[i + 1][j] + memo[i][j]; //if match, we need to add the preivous result. previous result: match or not match intotal
+                if(tc != sc) memo[i +1][j+1] = memo[i +1][j]; //since we are visiting s to match t 
+                else memo[i + 1][j + 1] = memo[i + 1][j] + memo[i][j]; //if they are the same. we have 2 options and we need to add them together: do not match: then memo[i + 1][j]; match : memo[i][j]. 
             }
         }
         return memo[lenT][lenS];
