@@ -6,7 +6,7 @@ class Solution {
         for(int len = 1; len <= n; len++){
             int count = 0;
             for(int i = 1; i <= len; i++){
-                count += memo[i - 1] * memo[len - i];
+                count += memo[i - 1] * memo[len - i];  //left node * right node
             }
             memo[len] = count;
         }
