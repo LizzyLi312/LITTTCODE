@@ -12,7 +12,7 @@ class Solution {
                 List<Integer> left = diffWaysToCompute(input.substring(0, i)); //every part return how many different way it can add parenthese. so could be multiple ways 
                 List<Integer> right = diffWaysToCompute(input.substring(i + 1, input.length()));
                 List<Integer> one = helper(left, right, c);
-                res.addAll(one);
+                res.addAll(one); //This method appends all of the elements in the specified collection to the end of this list
             }
         }
         if(singleNum) res.add(Integer.valueOf(input));
