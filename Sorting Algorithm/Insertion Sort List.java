@@ -31,4 +31,4 @@ class Solution {
         pre.next = node;
     }
 }
-//time: O(n^2)
+//time: O(n^2) = n - 1 + n - 2 + n - 3 + ... + 2 + 1
