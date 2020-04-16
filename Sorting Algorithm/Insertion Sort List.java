@@ -31,3 +31,4 @@ class Solution {
         pre.next = node;
     }
 }
+//time: O(n^2)
