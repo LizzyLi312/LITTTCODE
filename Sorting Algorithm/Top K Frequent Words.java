@@ -9,7 +9,7 @@ class Solution {
         PriorityQueue<String> pq = new PriorityQueue<>(new Comparator<String>(){
             @Override
             public int compare(String s1, String s2){
-                if(map.get(s1) == map.get(s2)) return s2.compareTo(s1);
+                if(map.get(s1) == map.get(s2)) return s2.compareTo(s1); //put lowest before the high string
                 return map.get(s1) - map.get(s2);
             }
         });
@@ -23,3 +23,9 @@ class Solution {
         return res;
     }
 }
+/*
+Compares two strings lexicographically. The comparison is based on the Unicode value of each character in the strings. The character sequence represented by this String object is compared lexicographically to the character sequence represented by the argument string. 
+negative integer: String object lexicographically precedes the argument string
+positive integer: String object lexicographically follows the argument string 
+0:  if the strings are equal.
+*/
