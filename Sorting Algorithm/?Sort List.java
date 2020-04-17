@@ -31,8 +31,6 @@ class Solution {
             cur = cur.next;
         }
         cur.next = l1 != null ? l1 : l2; //add the reminding element 
-        ListNode res = dummy.next;
-        dummy.next = null;
-        return res;
+        return dummy.next;
     }
 }
