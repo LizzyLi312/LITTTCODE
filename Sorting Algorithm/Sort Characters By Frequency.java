@@ -13,11 +13,11 @@ class Solution {
                 else return map.get(c2) - map.get(c1); //if return a positive number then c1 will be put after c2
             }
         });
-        for(Character c : map.keySet()){
+        for(Character c : map.keySet()){  //use the new pq to sort 
             pq.offer(c);
         }
         StringBuilder res = new StringBuilder();
-        while(!pq.isEmpty()){
+        while(!pq.isEmpty()){ //put the character into result
             Character c = pq.poll();
             int count = map.get(c);
             while(count-- >0){
