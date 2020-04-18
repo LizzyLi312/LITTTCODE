@@ -4,12 +4,11 @@ class Solution {
         //also find the next node after K nodes
         int times = k;
         ListNode tempHead = head;
-        while(tempHead != null && times > 0){
+        while(tempHead != null && times > 0){ //need to check tempHead == null 
             tempHead = tempHead.next;
             times--;
         }
-        if(times == 0){
-        //using iteration method to reverse linkedlist with size K
+        if(times == 0){ //times == 0 means there are k nodes. using iteration method to reverse linkedlist with size K
             tempHead = reverseKGroup(tempHead, k);
             ListNode cur = head, next = head.next;
             while(times ++ < k){
@@ -18,7 +17,7 @@ class Solution {
                 tempHead = cur;
                 cur = next;
             }
-            head = tempHead;  //start next reverse
+            return prev;  //return the head of the k size reversed linklist 
         }
         return head;
     }
