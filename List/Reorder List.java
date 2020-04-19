@@ -5,8 +5,6 @@ class Solution {
         mid = reverse(mid);
         head = merge(head, mid);
     }
-    //find the middle, there are 2 situations. there # of node is odd or is even
-    //cant use the count++ and find the middle it could cause out of memory error
     //useing slow and fast two pointers to find the middle node. AND remeber to cut the linked list
     private ListNode findMid(ListNode head){
         ListNode fast = head;
