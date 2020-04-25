@@ -1,3 +1,4 @@
+//faltten the tree 
 class Solution {
     private Integer prev = null;
     private int res = Integer.MAX_VALUE;
