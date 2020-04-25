@@ -1,3 +1,4 @@
+//The idea is to use two arrays (start[] and end[]) to record the the indices of the leftmost node and rightmost node in each level, respectively. For each level of the tree, the width is end[level] - start[level] + 1. 
 class Solution {
     public int widthOfBinaryTree(TreeNode root) {
         if(root == null) return 0;
