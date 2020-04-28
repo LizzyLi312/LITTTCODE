@@ -6,7 +6,7 @@ class Solution {
             String s = tokens[i];
             if(isOper(s)) num.push(cal(num.pop(), num.pop(), s));
             else if(isNum(s)){
-                num.push(Integer.parseInt(s));
+                num.push(Integer.parseInt(s));  //	parseInt(String s) Parses the string argument as a signed decimal integer.
             }
         }
         return num.pop();
