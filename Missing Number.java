@@ -1,16 +1,5 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        //HashMap 2 passes
-        //time: O(n)
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int num : nums){
-            map.put(num, 1);
-        }
-        int i = 0;
-        for(i = 0; i <= nums.length; i++){
-            if(!map.containsKey(i)) break;
-        }
-        return i;
         //HashSet 2 passes
         //time: o(n)
         Set<Integer> set = new HashSet<>();
@@ -25,5 +14,14 @@ class Solution {
         return i;
         //Sort + one pass check index and value 
         //time: O(n + nlogn)
+        
+        //bit operation
+        //time: O(n) space:O(1)
+        int miss = nums.length;
+        for(int i = 0; i < nums.length; i++){
+            miss = miss ^ (i ^ nums[i]);
+        }
+        return miss;
+        //or sort + index consistent
     }
 }
