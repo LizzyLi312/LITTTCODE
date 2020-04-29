@@ -11,6 +11,9 @@ class Solution {
         cols.offer(0);
         int min = 0, max = 0;
         while(!que.isEmpty()){
+            //need to cahce the size 
+            //if(i == 0) min = Math.min(min, idx);
+            //if(i == size - 1) max = Math.max(max, idx);
             TreeNode temp = que.poll();
             int idx = cols.poll();
             if(!map.containsKey(idx)) map.put(idx, new ArrayList<>());
@@ -18,7 +21,7 @@ class Solution {
             if(temp.left != null){
                 que.offer(temp.left);
                 cols.offer(idx - 1);
-                min = Math.min(min, idx - 1); //update the min and the max here 
+                min = Math.min(min, idx - 1); //update the min and the max either here or outside 
             }
                 if(temp.right != null){
                     que.offer(temp.right);
