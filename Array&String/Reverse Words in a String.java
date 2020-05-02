@@ -8,13 +8,14 @@ class Solution {
         return clean(words.toCharArray());
     }
     private String clean(char[] s){ //use 2 pointers. inplace remove extra space 
-        int i = 0, j = 0, n = s.length;
-        while(j < n){
-            while(j < n && s[j] != ' ') s[i++] = s[j++]; //keep the non space characters
-            while(j < n && s[j] == ' ') j++; //find the next non space character
-            if(j < n) s[i++] = ' '; //keep one space
+        int slow = 0, n = s.length;
+        for(int fast = 0; fast < n; fast++){
+            if(s[fast] == ' ' && s[fast - 1] != ' ') s[slow++] = s[fast];
+            else if(s[fast] != ' ') s[slow++] = s[fast];
+            else continue;
         }
-        return new String(s).substring(0, i);
+        // if(s[slow - 1] == ' ') return new String(s).substring(0, slow - 1);
+        return new String(s).substring(0, slow);
     }
     private String reverse(String s){
         if(s.length() == 0) return "";
