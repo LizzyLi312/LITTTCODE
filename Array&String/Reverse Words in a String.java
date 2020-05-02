@@ -40,7 +40,7 @@ class Solution {
                 while(left < right){ //reverse each word
                     swap(arr, left++, right--);
                 }
-                i = j;
+                i = j; //move to the next search
             }
         }
         return new String(arr);
