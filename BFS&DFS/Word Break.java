@@ -5,7 +5,7 @@ class Solution {
         return dfs(s, wordDict, 0, memo);
     }
     private boolean dfs(String s, List<String> wordDict, int idx, Boolean[] memo){
-        if(s.length() == idx) return true;
+        if(s.length() == idx) return true; //do not need to prune here
         if(memo[idx] != null) return memo[idx];
         for(int i = idx; i < s.length(); i++){ //dfs: check whether it can be parsed from idx to len - 1 or not
             String str = s.substring(idx, i + 1);  //range: [idx, i + 1)
