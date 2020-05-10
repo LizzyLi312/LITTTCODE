@@ -23,6 +23,13 @@ class Solution {
                 dfs(s, wordDict, res, i, sol, memo);
                 sol.setLength(prevLen);
             }
+            //or
+            if(set.contains(s.substring(idx, i + 1)) && memo[i + 1]){
+                if(len == 0) sol.append(s.substring(idx, i + 1));
+                else sol.append(" " + s.substring(idx, i + 1));
+                dfs(s, set, i + 1, res, sol, memo);
+                sol.setLength(len);
+            }
         }
         if(curSize == res.size()) memo[idx] = false;  //means there is nothing new added in the res list 
     }
