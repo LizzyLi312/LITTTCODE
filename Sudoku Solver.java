@@ -23,9 +23,10 @@ class Solution {
     }
     private boolean isValid(char[][] board, int row, int col, char c){ //check 3 directions
         for(int i = 0; i < 9; i++){
-            char rowChar = board[i][col];
-            char colChar = board[row][i];
-            char blockChar = board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3];
+            char colChar = board[i][col]; //they re at the same colunm
+            char rowChar = board[row][i];  //theyre at the same row 
+            char blockChar = board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3]; 
+            //i / 3 : 000111222 i % 3: 012012012 the visiting order: first row, secon row, third row
             if(rowChar != '.' && rowChar == c) return false;
             if(colChar != '.' && colChar == c) return false;
             if(blockChar != '.' && blockChar == c) return false;
