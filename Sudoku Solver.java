@@ -27,6 +27,7 @@ class Solution {
             char rowChar = board[row][i];  //theyre at the same row 
             char blockChar = board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3]; 
             //i / 3 : 000111222 i % 3: 012012012 the visiting order: first row, secon row, third row
+            //there are 9 elements in total. i-th element' row = i / row, col = i % col
             if(rowChar != '.' && rowChar == c) return false;
             if(colChar != '.' && colChar == c) return false;
             if(blockChar != '.' && blockChar == c) return false;
