@@ -1,4 +1,39 @@
 //clarify: is there duplicate in t?
+
+//1 Hashmap
+class Solution {
+    public String minWindow(String s, String t) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(char c : t.toCharArray()){
+            if(map.containsKey(c)) map.put(c, map.get(c) + 1);
+            else map.put(c, 1);
+        }
+        int left = 0;
+        int l = -1;
+        int min = s.length() + 1;
+        int count = 0;
+        for(int right = 0; right < s.length(); right++){
+            char c = s.charAt(right);
+            if(map.containsKey(c)){  //only do something when the character we visit in s is one of the characters in t
+                map.put(c, map.get(c) - 1);
+                if(map.get(c) >= 0) count++;
+                while(left < s.length() && count == t.length()){
+                    if(right - left + 1 < min){ //range: [right, left]
+                        l = left;
+                        min = right - left + 1;
+                    }
+                    if(map.containsKey(s.charAt(left))){ //shrink the range 
+                        map.put(s.charAt(left), map.get(s.charAt(left)) + 1);
+                        if(map.get(s.charAt(left)) > 0) count--; 
+                    }
+                    left++;
+                }
+            }
+        }
+        return l == -1 ? "" : s.substring(l, l + min); 
+    }
+}
+//2 HashMap
 class Solution {
     public String minWindow(String s, String t) {
         HashMap<Character, Integer> mapT = new HashMap<Character, Integer>(); //dictionary of t
@@ -33,8 +68,8 @@ class Solution {
                         }
                         head++;
                     }
-                    if(min > tail - head){  //update the result
-                        min = tail - head;
+                    if(min > tail - head + 1){  //update the result
+                        min = tail - head + 1;
                         low = head;
                         high = tail;
                     }
@@ -45,3 +80,4 @@ class Solution {
         return low == -1 ? "" : s.substring(low, high + 1); //if low = -1 mean we never updated it.
     }
 }
+//time: O(n)
