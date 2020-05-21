@@ -32,7 +32,7 @@ ppublic class Distinct {
                 if(cost[i][j] != 0 && grid[i][j] == 0) min = Math.min(min, cost[i][j]);
             }
         }
-        return min;
+        return min == Integer.MAX_VALUE ? -1 : min;
     }
     private static void bfs(int[][] grid, int i, int j, int[][] cost){
         int row = grid.length, col = grid[0].length;
