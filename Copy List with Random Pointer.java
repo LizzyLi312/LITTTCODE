@@ -1,3 +1,4 @@
+//we need: relation between old nodes and new nodes; return new head
 class Solution {
     public Node copyRandomList(Node head) {
         //2 passes + HashMap
@@ -16,6 +17,6 @@ class Solution {
             relation.get(cur).random = relation.get(cur.random);
             cur = cur.next;
         }
-        return relation.get(head);
+        return relation.get(head); //new head
     }
 }
