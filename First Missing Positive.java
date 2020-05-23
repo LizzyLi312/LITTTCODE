@@ -1,3 +1,5 @@
+//idea: use the index and nums[index] to get the res
+//make the array start from 1, so we need to check nums[i] == i + 1
 class Solution {
     public int firstMissingPositive(int[] nums) {
         if(nums == null || nums.length == 0) return 1;  //corner case 
