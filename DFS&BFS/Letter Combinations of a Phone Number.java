@@ -1,3 +1,4 @@
+//bfs
 class Solution {
     public List<String> letterCombinations(String digits) {
         List<String> res = new ArrayList<>();
@@ -7,7 +8,7 @@ class Solution {
             List<Character> list = get(digits.charAt(i));
             int size = res.size();
             for(int j = 0; j < size; j++){ //go thru every previous result 
-                String cur = res.get(0);
+                String cur = res.get(0); //que.poll()
                 res.remove(0);
                 for(char c : list){
                     res.add(cur + c);  //and add a new character to it
