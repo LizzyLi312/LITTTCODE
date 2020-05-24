@@ -1,12 +1,4 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
+//bfs
 class Solution {
     public int findBottomLeftValue(TreeNode root) {
         if(root == null) return -1;
@@ -29,15 +21,6 @@ class Solution {
     }
 }
 
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 class Solution {
     public int findBottomLeftValue(TreeNode root) {
         if(root == null) return -1;
@@ -62,4 +45,27 @@ class Solution {
     }
 }
 
-//check whether it is a new layer or not 
+//check whether it is a new layer or not
+//time: O(n)
+
+//dfs
+class Solution {
+    private int res = 0;
+    public int findBottomLeftValue(TreeNode root) {
+        if(root == null) return -1;
+        res = root.val;
+        dfs(root, 1);
+        return res;
+    }
+    private int max = 1;
+    private void dfs(TreeNode root, int depth){
+        if(root == null) return;
+        if(depth > max){
+            res = root.val;
+            max = depth;
+        }
+        dfs(root.left, depth + 1);
+        dfs(root.right, depth + 1);
+    }
+}
+//time: O(n)
