@@ -27,7 +27,7 @@ class Solution {
         }
         return -1;
     }
-    private List<char[]> convert(char[] cs, HashSet<String> set, HashSet<String> visited){ //find the next lock comnination
+    private List<char[]> convert(char[] cs, HashSet<String> set, HashSet<String> visited){ //find the next lock
         List<char[]> res = new ArrayList<>();
         for(int i = 0; i < cs.length; i++){
             char tmp = cs[i];  //need to be cached
@@ -36,6 +36,7 @@ class Solution {
             else cs[i] = (char) (tmp + 1);
             String str = String.valueOf(cs);
             if(!set.contains(str) && !visited.contains(str)) res.add(cs.clone()); //need deep copy
+            //do not need to set back here since already cache the temp character the original character in the string 
             // -1 combo
             if(tmp == '0') cs[i] = '9';
             else cs[i] = (char) (tmp - 1);
