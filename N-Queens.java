@@ -51,9 +51,6 @@ class Solution {
         List<List<String>> res = new ArrayList<>();
         if (n < 0) return res;
         int[] idx = new int[n];
-        for (int i = 0; i < n; i++) {
-            idx[i] = '.';
-        }
         dfs(n, res, idx, 0);
         return res;
     }
@@ -74,11 +71,7 @@ class Solution {
     private static boolean isValid(int[] idx, int position, int index) {
         if (index == 0) return true;
         for (int i = 0; i < index; i++) {
-            if (idx[i] == position) return false;
-        }
-        if (idx[index - 1] - 1 == position || idx[index - 1] + 1 == position) return false;
-        for(int i = 0; i < index; i++){
-            if(Math.abs(position - idx[i]) == Math.abs(index - i)) return false;
+            if (idx[i] == position || Math.abs(position - idx[i]) == Math.abs(index - i)) return false;
         }
         return true;
     }
