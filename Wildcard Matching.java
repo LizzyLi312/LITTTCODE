@@ -1,4 +1,4 @@
-//pruning
+//pruning, dfs
 class Solution {
     public boolean isMatch(String s, String p) {
         if(s == null || p == null) return false;
@@ -20,8 +20,8 @@ class Solution {
         }
         
         else{
-            for(int i = 0; i + idxS <= s.length(); i++){
-                if(dfs(s, idxS + i, p, idxP + 1, memo)){
+            for(int i = 0; i <= s.length(); i++){ ////need to make sure s is in the range
+                if(i + idxS <= s.length() && dfs(s, idxS + i, p, idxP + 1, memo)){
                     memo[idxS][idxP] = true;
                     return true;
                 }
