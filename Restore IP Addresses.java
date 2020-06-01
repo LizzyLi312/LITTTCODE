@@ -18,12 +18,12 @@ class Solution {
         for(int l = 1; l <= 3; l++){ //the length could be 1 or 2 or 3
             if(idx + l > s.length()) break; 
             int val = Integer.valueOf(s.substring(idx, idx + l)); //cache the value
-            if(val <= 255){
+            if(val <= 255 && val >= 0){
                 sol.append(val + ".");
                 dfs(s, idx + l, sol, res, num + 1);  //since substring's range is [idx, idx + l) so next position that needed to be checked is idx + l
                 sol.setLength(len);
             }
-            if(val == 0) break;
+            if(val == 0) break; //since "05" is "5" so we need to cut the loop when we encouter 0
         }
     }
 }
