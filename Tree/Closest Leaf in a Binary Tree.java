@@ -21,17 +21,22 @@ class Solution {
         if(root == null) return null;
         Result left = dfs(root.left, target);
         Result right = dfs(root.right, target);
-        if(left == null && right == null){ //leaf node
+        //leaf node, no child 
+        if(left == null && right == null){ 
             if(root.val == target) tryUpdate(0, root);
             return new Result(1, root.val == target, root); 
         }
+        //only one child
         else if(right == null) return handleOnlyOneChild(root, left, target);
         else if(left == null) return handleOnlyOneChild(root, right, target);
+        //has 2 children
         else{
+            //root is the target
             if(root.val == target){
                 tryUpdate(left.val < right.val ? left.val : right.val, left.val < right.val ? left.leaf : right.leaf);
                 return new Result(0, true, null);
             }
+            //one of the children branch has target 
             else if(left.containsTarget){
                 tryUpdate(left.val + 1 + right.val, right.leaf);
                 return new Result(left.val + 1, true, null);
@@ -40,17 +45,16 @@ class Solution {
                 tryUpdate(left.val + 1 + right.val, left.leaf);
                 return new Result(right.val + 1, true, null);
             }
+            //if either of the children contains target. return the min dis from leaf nodes and record the leaf node 
             else{
                 return new Result(Math.min(left.val, right.val) + 1, false, left.val < right.val ? left.leaf : right.leaf);
             }
         }
     }
     private Result handleOnlyOneChild(TreeNode root, Result child, int target){
-        int d = 0;
         TreeNode node = child.leaf;
         if(root.val == target) tryUpdate(child.val + 1, node);
-        else d = child.val + 1;
-        return new Result(d, root.val == target || child.containsTarget, node);
+        return new Result(child.val + 1, root.val == target || child.containsTarget, node);
     }
     private void tryUpdate(int d, TreeNode node){
         if(d < min){
