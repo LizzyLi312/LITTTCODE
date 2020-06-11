@@ -1,3 +1,4 @@
+//bottom up. return whether the child and root match value 
 class Solution {
     private int res = 0;
     public int countUnivalSubtrees(TreeNode root) {
