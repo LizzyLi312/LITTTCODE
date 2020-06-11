@@ -25,8 +25,8 @@ class Solution {
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
         if(gas == null || gas.length == 0 || cost == null || cost.length == 0) return -1;
-        int len = gas.length, count = 0, start = len, end = 0;
-        while(end < start){
+        int len = gas.length, count = 0, start = len, end = 0; 
+        while(end < start){ //start from len and end with 0 to make sure it can make it back to where it starts
             if(count >= 0){ 
                 count += gas[end] - cost[end];
                 end++;
