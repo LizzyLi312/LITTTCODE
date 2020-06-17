@@ -24,11 +24,11 @@ class Solution {
                 }
                 if(c1 != c2){ //since prev is before cur so c1 is c2's neighbor 
                     graph[c1 - 'a'].neighbours.add(graph[c2 - 'a']);
-                    valid = true;  //when c1 != c2 then we need to traverse character in s1 first 
+                    valid = true;  //avoid the invalid case: string1: "abc", string2: "ab" 
                     break;
                 }
             }
-            while(idx1 < prev.length()){
+            while(idx1 < prev.length()){ //if there is still some characters in the string 
                 if(!valid) return "";
                 char c = prev.charAt(idx1++);
                 if(graph[c - 'a'] == null){
@@ -36,6 +36,13 @@ class Solution {
                     vs.add(graph[c - 'a']);
                 }
             }
+            while(idx2 < cur.length()){
+                char c = cur.charAt(idx2++);
+                if(graph[c - 'a'] == null){
+                    graph[c - 'a'] = new V(c);
+                    vs.add(graph[c - 'a']);
+                }
+            } 
             prev = cur;
         }
         char[] res = new char[vs.size()];
@@ -47,12 +54,13 @@ class Solution {
     }
     private boolean dfs(char[] res, V cur, HashSet<V> cycle){ //using dfs(topological sort) to build path
         //HashSet: deduplicate
+        //2 status: visiting, visited
         if(cycle.contains(cur)) return false;
         if(cur.visited) return true;
         cur.visited = true;
         cycle.add(cur);
         for(V nei : cur.neighbours){
-            if(!dfs(res, nei, cycle)) return false;
+            if(!dfs(res, nei, cycle)) return false; //find cycle 
         }
         cycle.remove(cur); //remove cur for new path 
         res[curLab--] = cur.ch;
