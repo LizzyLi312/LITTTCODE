@@ -1,4 +1,5 @@
-//if N == 10000 then there will be cycle
+//if N == 10000 then there will be cycle. the 1st and last element could never change. so we have 64 status
+//so time: O(1)
 class Solution {
     public int[] prisonAfterNDays(int[] cells, int N) {
         if(cells == null || cells.length == 0) return new int[0];
