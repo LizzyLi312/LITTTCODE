@@ -19,3 +19,21 @@ class Solution {
         return ress;
     }
 }
+
+//dfs
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res;
+        dfs(root, 0, res);
+        Collections.reverse(res);
+        return res;
+    }
+    private void dfs(TreeNode root, int layer, List<List<Integer>> res){
+        if(layer >= res.size()) res.add(new ArrayList<>());
+        res.get(layer).add(root.val);
+        if(root.left != null) dfs(root.left, layer + 1, res);
+        if(root.right != null) dfs(root.right, layer + 1, res);
+        
+    }
+}
