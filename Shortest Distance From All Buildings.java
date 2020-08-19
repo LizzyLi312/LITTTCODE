@@ -41,7 +41,7 @@ ppublic class Distinct {
         Queue<int[]> que = new LinkedList<>();
         que.offer(new int[] {i, j});
         visited[i][j] = true;
-        int dis = 0;
+        int dis = 0; //dis = 1, add the dis when add them in the que works too
         while(!que.isEmpty()){
             int size = que.size();
             while(size-- > 0){
@@ -57,7 +57,7 @@ ppublic class Distinct {
             } //finish one layer 
             dis++;
         }
-        for(int a = 0; a < row; a++){
+        for(int a = 0; a < row; a++){ //need to check for every building. since only if there was just one building cant reach then its invalid position
             for(int b = 0; b < col; b++){
                 if(!visited[a][b] && grid[a][b] == 0) grid[a][b] = 2;  //mark 
             }
@@ -71,3 +71,4 @@ ppublic class Distinct {
 }
 
 //using bfs
+//O(m*n)
