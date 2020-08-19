@@ -19,21 +19,3 @@ class Solution {
         return ress;
     }
 }
-
-//dfs
-class Solution {
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if(root == null) return res;
-        dfs(root, 0, res, true);
-        return res;
-    }
-    private void dfs(TreeNode root, int layer, List<List<Integer>> res, boolean isEven){
-        if(layer >= res.size()) res.add(new ArrayList<>());
-        if(isEven) res.get(layer).add(root.val);
-        else res.get(layer).add(0, root.val);
-        if(root.left != null) dfs(root.left, layer + 1, res, !isEven);
-        if(root.right != null) dfs(root.right, layer + 1, res, !isEven);
-    }
-}
-//time: O(n)
