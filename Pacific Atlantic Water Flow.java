@@ -19,7 +19,7 @@ class Solution {
             que.add(new int[]{i, col - 1});  //right side
             atlantic[i][col - 1] = true;
         }
-        for(int j = 0; j < col - 1; j++){  //bottom side
+        for(int j = 0; j < col - 1; j++){  //bottom side, remeber to subtract the last column
             que.add(new int[]{row - 1, j});
             atlantic[row - 1][j] = true;
         }
@@ -35,6 +35,11 @@ class Solution {
             //do not need to cache the size, cause we do not need the layer searching
             for(int[] dir : directions){
                 int rowIdx = cur[0] + dir[0], colIdx = cur[1] + dir[1];
+                //if(x >= 0 && x < self.length && y >= 0 && y < self[0].length && matrix[cur[0]][cur[1]] <= matrix[x][y] && !self[x][y]){
+                //    que.offer(new int[]{x, y});
+                //    self[x][y] = true;
+                //}
+                
                 if(rowIdx < 0 || rowIdx >= row || colIdx < 0 || colIdx >= col || matrix[cur[0]][cur[1]] > matrix[rowIdx][colIdx]) continue;
                 if(!selfSet[rowIdx][colIdx]){
                     que.offer(new int[]{rowIdx, colIdx});
@@ -45,4 +50,4 @@ class Solution {
     }
 }
 
-//use BFS. Time: O(n*m + m + n) -> O(m*n) space:O(m*n)
+//use BFS. Time: O(n*m + m + n) -> O(m*n) space:O(m*n) 
