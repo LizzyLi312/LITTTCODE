@@ -1,3 +1,4 @@
+//bfs. since we deal with it layer by layer
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
         List<Integer> res = new ArrayList<>();
@@ -15,7 +16,7 @@ class Solution {
             vs[nei[1]].addNei(nei[0]);
         }
         Queue<Integer> que = new LinkedList<>();  //BFS
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++){ //the most outside layer
             if(vs[i].isLeaves()){
                 que.add(i);
                 nodePool--;
