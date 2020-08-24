@@ -19,3 +19,20 @@ class Solution {
 }
 
 //O(2^n)
+
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(nums == null || nums.length == 0) return res;
+        res.add(new ArrayList<>());
+        for(int n : nums){
+            int size = res.size();
+            for(int i = 0; i < size; i++){
+                List<Integer> one = new ArrayList<Integer>(res.get(i));
+                one.add(n);
+                res.add(one);
+            }
+        }
+        return res;
+    }
+}
