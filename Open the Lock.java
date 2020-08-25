@@ -15,6 +15,7 @@ class Solution {
             int size = que.size();  
             while(size-- > 0){
                 char[] cur = que.poll();
+                if(cur.equals(target)) return count;
                 List<char[]> nexts = convert(cur, set, visited);
                 for(char[] next : nexts){
                     String nextString = String.valueOf(next);
