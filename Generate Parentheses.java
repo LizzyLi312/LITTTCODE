@@ -23,6 +23,20 @@ class Solution {
             sb.deleteCharAt(sb.length() - 1);  //only delete )
         }
     }
+    //
+        private void dfs(int n, int l, int r, List<String> res, StringBuilder sol){
+        if(sol.length() == n * 2 && l == r){
+            res.add(sol.toString());
+            return;
+        }
+        if(r - l > 0 || r > n || l > n) return;
+            sol.append('(');
+            dfs(n, l + 1, r, res, sol);
+            sol.setLength(sol.length() - 1);
+            sol.append(')');
+            dfs(n, l, r + 1, res, sol);
+            sol.setLength(sol.length() - 1);
+    }
 }
 //using dfs. 2n layers: 2n positions and 2 branches: adding ( or adding )
 //time: summation from 2 power of 0 to 2 power of 2n - 1
