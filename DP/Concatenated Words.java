@@ -21,9 +21,9 @@ class Solution {
         dp[0] = true;
         for(int i = 1; i <= word.length(); i++){
             for(int j = 0; j < i; j++){
-                if(!dp[j]) continue;
-                if(dict.contains(word.substring(j, i))){
-                    dp[i] = true;
+                if(!dp[j]) continue; //if (j, i) is not a word then continue
+                if(dict.contains(word.substring(j, i))){ //if it is a word. check the rest  
+                    dp[i] = true; 
                     break;
                 }
             }
