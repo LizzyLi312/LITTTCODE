@@ -17,6 +17,7 @@ class Solution {
     private boolean canForm(String word, HashSet<String> dict){
         if(dict.isEmpty()) return false;
         //word break, dp
+        //2 pointer check (0, i) is composed by words or not 
         boolean[] dp = new boolean[word.length() + 1];
         dp[0] = true;
         for(int i = 1; i <= word.length(); i++){
