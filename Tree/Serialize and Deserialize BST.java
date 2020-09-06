@@ -5,11 +5,11 @@ public class Codec {
         if(root == null) return null;
         StringBuilder res = new StringBuilder();
         serialize(root, res);
-        res.setLength(res.length() - 1);
+        res.setLength(res.length() - 1); //remove the last comma
         return res.toString();
     }
     
-    private void serialize(TreeNode root, StringBuilder res){
+    private void serialize(TreeNode root, StringBuilder res){ //pre order
         if(root == null) return;  //do not need to put the null in the string since it has order 
         res.append(root.val + ",");
         serialize(root.left, res);
@@ -38,3 +38,4 @@ public class Codec {
         return root;
     }
 }
+
