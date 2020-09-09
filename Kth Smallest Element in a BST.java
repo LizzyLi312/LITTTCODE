@@ -7,7 +7,7 @@ class Solution {
     private Integer helper(TreeNode root, int k){
         if(root == null) return 0;
         Integer leftSize = helper(root.left, k);  //need to be initialized with Integer since int only can be number. but Integer can be null
-        if(leftSize == null) return null; // as a flag
+        if(leftSize == null) return null; // as a flag. check result is on the left side 
         if(k == leftSize + 1){  //+1 means root itself
             res = root.val;
             return null;  //as a flag
@@ -15,6 +15,8 @@ class Solution {
         Integer rightSize = helper(root.right, k - leftSize - 1);
         return rightSize == null ? null : (leftSize + rightSize + 1);  //when the target is at right side return null. Otherwise return the number of node to the parent node
     }
+    
+    
     //Or use flag, -1 means we found the kth. When we found the kth mark the flag to true
     //so when either the right side or the left side equals to -1 then we return -1.
     //else return the number of nodes
