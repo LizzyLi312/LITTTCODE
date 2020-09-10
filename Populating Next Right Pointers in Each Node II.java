@@ -27,9 +27,14 @@ class Solution {
         while(cur != null){  //make sure it goes thru the whole thing.
             while(cur!= null){  //each layer, need to check whether it is a new layer or not 
                 if(cur.left != null){ 
-                    if(prev == null) head = cur.left;  //if prev is null means it is a new layer need to be done, i.e. it is the begining
-                    else prev.next = cur.left;
-                    prev = cur.left;  //update position it doesnt matter if prev == null or what
+                    if(prev == null){
+                        head = cur.left;  //if prev is null means it is a new layer need to be done, i.e. it is the begining
+                        prev = cur.left;
+                    }
+                    else{
+                        prev.next = cur.left;
+                        prev = prev.next;//update position it doesnt matter if prev == null or what
+                    }
                 }
                 if(cur.right != null){
                     if(prev == null) head = cur.right; 
