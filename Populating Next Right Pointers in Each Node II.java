@@ -29,7 +29,7 @@ class Solution {
                 if(cur.left != null){ 
                     if(prev == null) head = cur.left;  //if prev is null means it is a new layer need to be done, i.e. it is the begining
                     else prev.next = cur.left;
-                    prev = cur.left;  //update position
+                    prev = cur.left;  //update position it doesnt matter if prev == null or what
                 }
                 if(cur.right != null){
                     if(prev == null) head = cur.right; 
