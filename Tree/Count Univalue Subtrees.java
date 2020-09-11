@@ -13,6 +13,7 @@ class Solution {
         if(left && right){
             res++;
             return root.val == val; //compare the root's val and root's root's value 
+            //val is the previous val
         }
         else return false;
     }
