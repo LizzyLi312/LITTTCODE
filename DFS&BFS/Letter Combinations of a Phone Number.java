@@ -32,3 +32,49 @@ class Solution {
         return res;
     }
 }
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        if(digits == null || digits.length() == 0) return new ArrayList<>();
+        List<String> res = new ArrayList<>();
+        Queue<StringBuilder> que = new LinkedList<>();
+        for(int i = 0; i < digits.length(); i++){
+            List<Character> nexts = get(digits.charAt(i));
+            if(i == 0){
+                for(Character next : nexts){
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(next);
+                    que.offer(sb);
+                }
+                continue;
+            }
+            int size = que.size();
+            while(size-- > 0){
+                StringBuilder temp = que.poll();
+                for(Character next : nexts){
+                    temp.append(next);
+                    que.offer(new StringBuilder(temp));
+                    temp.setLength(temp.length() - 1);
+                }
+            }
+        }
+        while(!que.isEmpty()){
+            res.add(que.poll().toString());
+        }
+        return res;
+    }
+    private List<Character> get(char c){
+        List<Character> res = new ArrayList<>();
+        switch(c){
+            case'2': res.add('a'); res.add('b'); res.add('c'); break;
+            case'3': res.add('d'); res.add('e'); res.add('f'); break;
+            case'4': res.add('g'); res.add('h'); res.add('i'); break;
+            case'5': res.add('j'); res.add('k'); res.add('l'); break;
+            case'6': res.add('m'); res.add('n'); res.add('o'); break;
+            case'7': res.add('p'); res.add('q'); res.add('r'); res.add('s'); break;
+            case'8': res.add('t'); res.add('u'); res.add('v'); break;
+            case'9': res.add('w'); res.add('x'); res.add('y'); res.add('z'); break;
+        }
+        return res;
+    }
+}
