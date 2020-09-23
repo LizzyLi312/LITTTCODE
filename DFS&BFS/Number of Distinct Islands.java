@@ -43,6 +43,7 @@ public class Distinct {
         dfs(i -1, j, grid, sb, 'l');
         dfs(i, j + 1, grid, sb, 'u');
         dfs(i, j - 1, grid, sb, 'd');
+        //after traverse every dirctions then return 
         sb.append('b');  //when it takes turns also need a flag 
     }
 
