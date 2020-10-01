@@ -1,6 +1,6 @@
 //using stack to use the left boundry and the right boundry 
 //if stack is not empty then stack.peek() is the gratest element in the stack. if the incoming element is larger than the peek element. we keep pushing it into the stack
-//when the new element 
+//when the new element is smaller than the peek() then process the hisyogram from the highest 
 class Solution {
     public int largestRectangleArea(int[] heights) {
         if(heights == null || heights.length == 0) return 0;
@@ -18,7 +18,7 @@ class Solution {
                     int area = 0;
                     if(stack.isEmpty()) area = heights[popIdx] * i; //if stack is empty means there is nothing small than the current one. so we can calculate the area with heights[i] with it 
                     else area = heights[popIdx] * (i - stack.peek() - 1);
-                    //stack.peek() = the first smaller element than heights[popIdx]
+                    
                     max = Math.max(max, area);
                 }
                 stack.push(i);
