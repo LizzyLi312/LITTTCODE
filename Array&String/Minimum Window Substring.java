@@ -1,5 +1,5 @@
 //clarify: is there duplicate in t?
-
+// s = "ADOBECODEBANC", t = "ABC"
 //1 Hashmap
 class Solution {
     public String minWindow(String s, String t) {
@@ -33,51 +33,44 @@ class Solution {
         return l == -1 ? "" : s.substring(l, l + min); 
     }
 }
-//2 HashMap
+//less code 
 class Solution {
     public String minWindow(String s, String t) {
-        HashMap<Character, Integer> mapT = new HashMap<Character, Integer>(); //dictionary of t
-        HashMap<Character, Integer> cur = new HashMap<Character, Integer>();   //the count of the same character as t in s 
-        for(int i = 0; i < t.length(); i++){ 
-            char c = t.charAt(i);
-            if(!mapT.containsKey(c)){ //put characters into t's map
-                mapT.put(c, 1);
-                cur.put(c, 0); //create key for s' map
-            }
-            else{ //if there are multiples only update t's map
-                int num = mapT.get(c); 
-                mapT.put(c, num + 1);
-            }
+        if (s == null || s.length() == 0) return "";
+
+        int n = s.length(), m = t.length();
+        if (n < m) return "";
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) + 1);
         }
-        int min = s.length() + 1, low = -1, high = -1; //result
-        int head = 0, tail = 0; //silding window
-        int count = 0; 
-        while(tail < s.length()){
-            char c = s.charAt(tail);
-            if(mapT.containsKey(c)){ //if the character in s is character in t
-                int tt = mapT.get(c);
-                int curr = cur.get(c);
-                if(curr < tt) count++; //if the amout of c in T is smaller or equal to s then it doesnt count. since it already offseted all the c in t
-                cur.put(c, curr + 1); //but we also need to update the amout of c in map s
-                if(count == t.length()){ //that means we complete finding all the characters of t in s
-                    while(head < tail && (!mapT.containsKey(s.charAt(head)) || cur.get(s.charAt(head)) > mapT.get(s.charAt(head)))){
-                    //move head when the head character if not in t or the same character as the one in t is too much 
-                        if(mapT.containsKey(s.charAt(head))){
-                            curr = cur.get(s.charAt(head));
-                            cur.put(s.charAt(head), curr - 1);
-                        }
-                        head++;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(s);
+        sb.append("#");
+
+        String res = sb.toString();
+
+        int cnt = 0, l = 0;
+        for (int r = 0; r < n; r++) {
+            char c = s.charAt(r);
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) - 1);
+                if (map.get(c) >= 0) cnt++;
+
+                while (cnt == m && l < n) {
+                    if (res.length() > r - l + 1) {
+                        res = s.substring(l, r + 1);
                     }
-                    if(min > tail - head + 1){  //update the result
-                        min = tail - head + 1;
-                        low = head;
-                        high = tail;
+                    if (map.containsKey(s.charAt(l))) {
+                        map.put(s.charAt(l), map.get(s.charAt(l)) + 1);
+                        if (map.get(s.charAt(l)) > 0) cnt--;
                     }
+                    l++;
                 }
             }
-            tail++;
         }
-        return low == -1 ? "" : s.substring(low, high + 1); //if low = -1 mean we never updated it.
+        return res.length() == n + 1 ? "" : res;
     }
 }
 //time: O(n)
