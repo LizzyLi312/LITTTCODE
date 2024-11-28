@@ -1,36 +1,22 @@
- class Solution {
+class Solution {
     public int minMeetingRooms(int[][] intervals) {
-        if(intervals == null || intervals.length == 0 || intervals[0] == null || intervals[0].length == 0) return 0;
-        int max = 0;
-        List<EndPoint> list = new ArrayList<>();
-        for(int[] itv : intervals){
-            list.add(new EndPoint(itv[0], false));
-            list.add(new EndPoint(itv[1], true));
+        List<int[]> diff = new ArrayList<>();
+
+        for (int[] interval : intervals) {
+            int a = interval[0], b = interval[1];
+            diff.add(new int[]{a, 1});
+            diff.add(new int[]{b, -1});
         }
-        Collections.sort(list);
-        int count = 0;
-        for(EndPoint ep : list){
-            if(!ep.isEnd) count++;
-            else count--;
-            max = Math.max(count, max);
+
+        Collections.sort(diff, (o1, o2) -> (o1[0] != o2[0] ? o1[0] - o2[0] : o1[1] - o2[1])); // if end and start have the same value take end first
+
+        int res = 0;
+        int sum = 0;
+        for (int[] x : diff) {
+            sum += x[1];
+            res = Math.max(res, sum);
         }
-        return max;
-    }
-    class EndPoint implements Comparable<EndPoint>{
-        boolean isEnd;
-        int val;
-        public EndPoint(int val, boolean isEnd){
-            this.val = val;
-            this.isEnd = isEnd;
-        }
-        @Override
-        public int compareTo(EndPoint ep){
-            if(this.val < ep.val) return -1; //this will be put in the front 
-            else if(this.val > ep.val) return 1;
-            else{ //this.val == ep.val
-                if(this.isEnd) return -1;
-                else return 1;
-            }
-        }
+
+        return res;
     }
 }
