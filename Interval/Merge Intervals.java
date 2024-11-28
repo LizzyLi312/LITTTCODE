@@ -1,24 +1,21 @@
 class Solution {
-    public int[][] merge(int[][] intervals) {
-        if(intervals == null || intervals.length == 0 || intervals[0] == null || intervals[0].length == 0) return new int[0][0];
-        Arrays.sort(intervals, new Comparator<int[]>(){
-            @Override
-            public int compare(int[] interval1, int[] interval2){
-                return interval1[0]-interval2[0]; //comparator return value: -1, interval1 will be place first. 1 interval 2 will be place first
-            }
-        });
+    public int[][] insert(int[][] intervals, int[] newInterval) {
         List<int[]> res = new ArrayList<>();
-        int[] prev = intervals[0];
-        for(int[] itv : intervals){
-            if(itv[0] <= prev[1]){ //overlap
-                prev = new int[]{prev[0], Math.max(prev[1], itv[1])};
+
+        for (int[] interval : intervals) {
+            if (newInterval[1] < interval[0]) { // the new interval and current interval in the list is not overrlap and the newInterval is smaller 
+                res.add(newInterval);
+                newInterval = interval;
             }
-            else{
-                res.add(prev);
-                prev = itv; //prev will stop at the last interval 
+            if (newInterval[0] <= interval[1]) { // if the boundary is the same then merge 
+                int st = Math.min(newInterval[0], interval[0]);
+                int ed = Math.max(newInterval[1], interval[1]);
+                newInterval = new int[]{st, ed};
+            } else { // the current interval is smaller 
+                res.add(interval);
             }
         }
-        res.add(prev); //need post processing 
+        res.add(newInterval);
         return res.toArray(new int[res.size()][]);
     }
 }
