@@ -26,3 +26,31 @@ class Solution {
     }
 }
 //time: O(n)
+
+// based on kth smallest 
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return -1;
+
+        return quickSelect(nums, nums.length + 1 - k, 0, nums.length - 1);
+    }
+
+    private int quickSelect(int[] nums, int k , int l, int r) {
+        if (l >= r) return nums[r];
+        int pivot = nums[l + (r - l) / 2], i = l - 1, j = r + 1; 
+        while (i < j) {
+            while (nums[++i] < pivot);
+            while (nums[--j] > pivot);
+            if (i < j) swap(nums, i, j);
+        }
+        int sl = j - l + 1;
+        if (k <= sl) return quickSelect(nums, k, l, j);
+        return quickSelect(nums, k - sl, j + 1, r);
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    }
+}
