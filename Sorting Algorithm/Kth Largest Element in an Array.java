@@ -10,7 +10,7 @@ class Solution {
         int pivot = nums[end]; //choose a pivot 
         int idx = begin;
         for(int i = begin; i < end; i++){ //put the element who are smaller than the pivot into the right position 
-            if(nums[i] <= pivot){
+            if(nums[i] < pivot){
                 swap(nums, idx++, i);
             }
         }
