@@ -33,7 +33,7 @@ class LRUCache {
             insertToHead(p);
         } else {
             if (map.size() == capa) {
-                map.remove(tail.prev.key);
+                map.remove(tail.prev.key); // NEED TO REMOVE THE MAP FIRST OTHERWISE tail.prev would be a differnet element
                 remove(tail.prev);
             }
             Node p = new Node(key, value);
