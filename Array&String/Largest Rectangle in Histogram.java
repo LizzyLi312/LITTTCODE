@@ -1,59 +1,68 @@
-//using stack to use the left boundry and the right boundry 
-//if stack is not empty then stack.peek() is the gratest element in the stack. if the incoming element is larger than the peek element. we keep pushing it into the stack
-//when the new element 
+// solution1: looking for idx i's the first smaller element on left and right side. Elements's value in stack is decreasing
 class Solution {
     public int largestRectangleArea(int[] heights) {
-        if(heights == null || heights.length == 0) return 0;
-        Stack<Integer> stack = new Stack<>();
-        int max = 0;
-        for(int i = 0; i <= heights.length; i++){
-            int h = i < heights.length ? heights[i] : 0; 
-            //make the heights[i] == 0 so we do not have to post process. since all the elements are going to be poped out of the stack
-            if(stack.isEmpty() || h >= heights[stack.peek()]){
-                stack.push(i);
+        if (heights == null || heights.length == 0) return 0;
+
+        int n = heights.length;
+        int[] prev = new int[n];
+        int[] next = new int[n];
+        Stack<Integer> st = new Stack<>();
+
+        for (int i = 0; i < n; i++) { // prev: -1, -1, 1, 2, 1, 4
+            while (!st.isEmpty() && heights[st.peek()] >= heights[i]) {
+                st.pop();
             }
-            else{
-                while(!stack.isEmpty() && h < heights[stack.peek()]){
-                    int popIdx = stack.pop();
-                    int area = 0;
-                    if(stack.isEmpty()) area = heights[popIdx] * i; //if stack is empty means there is nothing small than the current one. so we can calculate the area with heights[i] with it 
-                    else area = heights[popIdx] * (i - stack.peek() - 1);
-                    //stack.peek() = the first smaller element than heights[popIdx]
-                    max = Math.max(max, area);
-                }
-                stack.push(i);
+            if (st.isEmpty()) prev[i] = -1; // means the left boundary is -1
+            else {
+                prev[i] = st.peek();
             }
+            st.push(i);
         }
-        return max;
-        //in the end there will be an element in the stack
+
+        st.clear();
+
+        for (int i = n - 1; i >= 0; i--) { // next: 1, 6, 4 ,4 ,6 ,6
+            while (!st.isEmpty() && heights[st.peek()] >= heights[i]) { // need to pop out the element that equal to the current one since we need to include this part. e.g [1, 1] 
+                st.pop();
+            }
+            if (st.isEmpty()) next[i] = n;
+            else next[i] = st.peek();
+            st.push(i);
+        }
+
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            int a = (next[i] - prev[i] - 1) * heights[i]; // (prev, next) cannot include the smaller elements since it cannot expand the area using height[i]'s height
+            res = Math.max(res, a);
+        }
+
+        return res;
     }
 }
-//time: O(n)
+//time: O(3n)
 
+
+//solution2: one pass stack keep a increasing order 
 class Solution {
     public int largestRectangleArea(int[] heights) {
-        if(heights == null || heights.length == 0) return 0;
-        int len = heights.length;
-        int[] left = new int[len];
-        int[] right = new int[len];
-        for(int i = 0; i < len; i++){
-            for(int j = i; j < len; j++){
-                if(heights[j] >= heights[i]) right[i] = j;
-                else break;
+        if (heights == null || heights.length == 0) return 0;
+        Stack<Integer> st = new Stack<>();
+
+        int res = 0, n = heights.length;
+        for (int i = 0; i <= n; i++) {
+            int x = i == n ? 0 : heights[i]; // need to do post processing 
+            while (!st.isEmpty() && heights[st.peek()] >= x) { 
+                int idx = st.pop();
+                int height = heights[idx];
+                int w;
+                if (st.isEmpty()) w = i - (-1) - 1;
+                else w = i - st.peek() - 1;
+                int a = height * w;
+                res = Math.max(a, res);
             }
-        }
-        for(int i = len - 1; i >= 0; i--){
-            for(int j = i; j >= 0; j--){
-                if(heights[j] >= heights[i]) left[i] = j;
-                else break;
-            }
-        }
-        int res = 0;
-        for(int i = 0; i < len; i++){
-            int temp = heights[i] * (right[i] - left[i] + 1);
-            res = Math.max(temp, res);
+            st.push(i);
         }
         return res;
     }
 }
-//O(n^2)  space:O(2n)
+//O(n)
