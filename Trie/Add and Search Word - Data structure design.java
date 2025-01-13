@@ -1,49 +1,60 @@
 class WordDictionary {
-    
-    private class TrieNode{
-        private TrieNode[] neighbor;
-        private char val;
-        private boolean isLeaf;
-        public TrieNode(char c){
-            val = c;
-            neighbor = new TrieNode[26];
-            isLeaf = false;
-        }
-    }
-    private TrieNode root;
-    /** Initialize your data structure here. */
+    TrieNode root;
     public WordDictionary() {
-        root = new TrieNode('\0');
+        root = new TrieNode();
     }
     
-    /** Adds a word into the data structure. */
     public void addWord(String word) {
-        if(word == null || word.length() == 0) return;
-        TrieNode cur = root;
-        for(int i = 0; i < word.length(); i++){
-            char c = word.charAt(i);
-            if(cur.neighbor[c - 'a'] == null) cur.neighbor[c - 'a'] = new TrieNode(c);
-            cur = cur.neighbor[c - 'a'];
+        TrieNode p = root;
+        for (char c : word.toCharArray()) {
+            if (p.next[c - 'a'] == null) {
+                p.next[c - 'a'] = new TrieNode();
+            }
+            p = p.next[c - 'a'];
         }
-        cur.isLeaf = true;
+        p.lastChar = true;
     }
     
-    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
     public boolean search(String word) {
-        return dfs(root, word, 0);
-    }
-    private boolean dfs(TrieNode cur, String word, int idx){
-        int len = word.length();
-        if(cur == null) return false;
-        if(len == idx) return cur.isLeaf;
-        char ch = word.charAt(idx);
-        if(ch != '.') return dfs(cur.neighbor[ch - 'a'], word, idx + 1);
-        else{
-            for(TrieNode nei : cur.neighbor){
-                if(dfs(nei, word, idx + 1)) return true;
+        TrieNode p = root;
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if (c == '.') {
+                for (TrieNode n : p.next) {
+                    if(n != null && sear(word.substring(i + 1), n)) return true;
+                }
+                return false;
             }
+            if (p.next[c - 'a'] == null) return false;
+            p = p.next[c - 'a'];
         }
-        return false;
+        return p.lastChar;
+    }
+
+    private boolean sear(String s, TrieNode p) {
+        if (s.isEmpty()) return p.lastChar; // base case
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '.') {
+                for (TrieNode n : p.next) {
+                    if (n != null && sear(s.substring(i + 1), n)) return true;
+                }
+                return false;
+            }
+            if (p.next[c - 'a'] == null) return false;
+            p = p.next[c - 'a'];
+        }
+        return p.lastChar;
+    }
+
+    class TrieNode {
+        TrieNode[] next;
+        boolean lastChar;
+        public TrieNode() {
+            next = new TrieNode[26];
+            lastChar = false;
+        }
     }
 }
 
