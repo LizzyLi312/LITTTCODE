@@ -42,6 +42,8 @@ class Solution {
         return false;
     }
 }
+
+
 //time: O(V + E)
 //USING HASHSET
 class Solution {
@@ -83,5 +85,41 @@ class Solution {
         set.remove(source.val); //remove it when we finish a branch
         res[curLab--] = source.val;
         return true;
+    }
+}
+
+// topo + bfs
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        int n = numCourses;
+        List<Integer>[] g = new List[n];
+        int[] d = new int[n];
+
+        for (int i = 0; i < n; i++) g[i] = new ArrayList<>();
+
+        for (int[] p : prerequisites) {
+            int in = p[0], out = p[1];
+            g[out].add(in);
+            d[in]++;
+        }
+
+        Queue<Integer> que = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            if (d[i] == 0) que.offer(i);
+        }
+
+        List<Integer> res = new LinkedList<>();
+
+        while (!que.isEmpty()) {
+            int t = que.poll();
+            res.add(t);
+            for (int child : g[t]) {
+                if (--d[child] == 0) que.offer();
+            }
+        }
+        if (res.size() != n) return new int[0];
+        int[] ans = new int[n];
+        for (int i = 0; i < n; i++) ans[i] = res.get(i);
+        return ans;
     }
 }
