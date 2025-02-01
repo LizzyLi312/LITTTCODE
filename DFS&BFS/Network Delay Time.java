@@ -19,6 +19,7 @@ class Solution {
             visited[curNode] = true;
             res = curDis;
             N--; //this node got the singal
+            if (N == 0) return res;
             if(map.containsKey(curNode)){
                 for(int next : map.get(curNode).keySet()){
                     pq.add(new int[] {curDis + map.get(curNode).get(next), next});

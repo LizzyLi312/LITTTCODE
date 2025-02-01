@@ -1,33 +1,57 @@
 class Solution {
+    Stack<Character> ops;
+    Stack<Integer> nums;
     public int calculate(String s) {
-        if(s == null || s.length() == 0) return 0;
-        Stack<Integer> stack = new Stack<>();
-        int result = 0;
-        int sign = 1;
-        for(int i = 0; i < s.length(); i++){
+        if (s == null || s.length() == 0) return -1;
+
+        ops = new Stack<>();
+        nums = new Stack<>();
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        map.put('+', 1);
+        map.put('-', 1);
+        map.put('/', 2);
+        map.put('*', 2);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            if (c != ' ') sb.append(c);
+        }
+
+        s = sb.toString();
+
+        for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if(Character.isDigit(c)){  //isDigit(char ch):Determines if the specified character is a digit.
-                int num = c - '0';
-                while(i + 1 < s.length() && Character.isDigit(s.charAt(i+1))){  //if num has more than 1 digit
-                    num = num * 10 + (s.charAt(i + 1) - '0');
-                    i++;
-                }
-                result += num * sign;
-            }
-            else if(c == '+')
-                sign = 1;
-            else if(c == '-')
-                sign = -1;
-            else if(c == '('){  //push the previous result and start a new one 
-                stack.push(result);
-                stack.push(sign);
-                result = 0;
-                sign = 1;
-            }
-            else if(c == ')'){ //retrive the preious result and add it, the 1st one come out is the sign cause you pushed it after the num
-                result = result * stack.pop() + stack.pop();
+            if (Character.isDigit(c)) {
+                int j = i;
+                while (j < s.length() && Character.isDigit(s.charAt(j))) j++;
+                nums.push(Integer.parseInt(s.substring(i, j)));
+                i = j - 1;
+            } else if (c == '(') {
+                ops.push(c);
+            } else if (c == ')') {
+                while (!ops.isEmpty() && ops.peek() != '(') eval();
+                ops.pop();
+            } else {
+                if (i == 0 || s.charAt(i - 1) == '(') nums.push(0);
+                while (!ops.isEmpty() && ops.peek() != '(' && map.get(ops.peek()) >= map.get(c)) eval();
+                ops.push(c);
             }
         }
-        return result;
+        while (!ops.isEmpty()) eval();
+        return nums.peek();
+    }
+
+    private void eval() {
+        int second = nums.pop();
+        int first = nums.pop();
+
+        char op = ops.pop();
+        if (op == '+') nums.push(first + second);
+        else if (op == '-') nums.push(first - second);
+        else if (op == '*') nums.push(first * second);
+        else if (op == '/') nums.push(first / second);
+        return;
     }
 }

@@ -1,74 +1,72 @@
-class LRUCache{
-    private int capacity;
-    private int curSize;
-    private HashMap<Integer, DLL> map; //cache
-    private DLL head;
-    private DLL tail;
-    
+// HashMap (Integer, Node) + doubly linked list 
+class LRUCache {
+    HashMap<Integer, Node> map;
+    Node head, tail;
+    int capa;
+
     public LRUCache(int capacity) {
-        this.capacity = capacity;
-        curSize = 0;
         map = new HashMap<>();
-        head = new DLL(0, 0); //take dummy node as head and tail 
-        tail = new DLL(0, 0); 
+        head = new Node(-1, -1);
+        tail = new Node(-1, -1);
+        capa = capacity;
+
         head.next = tail;
         tail.prev = head;
     }
     
-    public int get(int key) { 
-    // Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1
-        if(!map.containsKey(key)) return -1;
-        DLL node = map.get(key);
-        moveToHead(node); 
-        return node.val;
-    }
-    /*
-    Set or insert the value if the key is not already present. When the cache reached its capacity, 
-    it should invalidate the least recently used item before inserting a new item.
-    */
-    public void put(int key, int value) {
-        if(!map.containsKey(key)){ 
-            DLL node = new DLL(key, value);
-            map.put(key, node);
-            if(curSize < capacity) curSize++;
-            else{ //if the size is over capacity. then delete the last word (delete node from doubly linked list)
-                DLL lastOne = tail.prev;
-                lastOne.prev.next = tail;
-                tail.prev = lastOne.prev;
-                map.remove(lastOne.key);
-            }
-            moveToHead(node);
+    public int get(int key) {
+        if (map.containsKey(key)) {
+            Node p = map.get(key);
+            remove(p);
+            insertToHead(p);
+            return p.val;
         }
-        else{
-            DLL node = map.get(key);
-            node.set(value);
-            moveToHead(node);
-        }
-    }
-    private void moveToHead(DLL node){
-        DLL prev = node.prev;
-        DLL next = node.next;
-        //cut the previous connection
-        if(prev != null) prev.next = next; 
-        if(next != null) next.prev = prev; 
-        //put the node to the head 
-        node.next = head.next;
-        head.next = node;
-        node.prev = head;
-        node.next.prev = node;
-    }
-    class DLL{ //doubly linked list
-        public int key;
-        public int val;
-        public DLL prev;
-        public DLL next;
+        else return -1;
         
-        public DLL(int key, int v){
-            this.key = key;
-            val = v;
+    }
+    
+    public void put(int key, int value) {
+        if (map.containsKey(key)) {
+            Node p = map.get(key);
+            p.val = value;
+            remove(p);
+            insertToHead(p);
+        } else {
+            if (map.size() == capa) {
+                map.remove(tail.prev.key); // NEED TO REMOVE THE MAP FIRST OTHERWISE tail.prev would be a differnet element
+                remove(tail.prev);
+            }
+            Node p = new Node(key, value);
+            map.put(key, p);
+            insertToHead(p);
         }
-        public void set(int v){
-            val = v;
+    }
+
+    private void remove(Node node) {
+        Node prev = node.prev;
+        Node next = node.next;
+        prev.next = next;
+        next.prev = prev;
+    }
+
+    private void insertToHead(Node node) {
+        Node next = head.next;
+        node.next = next;
+        head.next = node;
+        next.prev = node;
+        node.prev = head;
+        
+    }
+
+    class Node {
+        int key, val;
+        Node prev, next;
+
+        public Node(int key, int val) {
+            this.key = key;
+            this.val = val;
+            this.prev = null;
+            this.next = null;
         }
     }
 }
