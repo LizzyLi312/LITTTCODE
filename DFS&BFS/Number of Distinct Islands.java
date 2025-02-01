@@ -40,6 +40,20 @@ class Solution {
         return set.size();
     }
 
+    private static void dfs(int i, int j, int[][] grid, StringBuilder sb, char dir){
+        int row = grid.length;
+        int col = grid[0].length;
+        if(i >= row || i < 0 || j < 0 || j >= col || grid[i][j] == 0) return;
+        grid[i][j] = 0; //using as visited matrix 
+        sb.append(dir);
+        dfs(i + 1, j, grid, sb, 'r');
+        dfs(i -1, j, grid, sb, 'l');
+        dfs(i, j + 1, grid, sb, 'u');
+        dfs(i, j - 1, grid, sb, 'd');
+        //after traverse every dirctions then return 
+        sb.append('b');  //when it takes turns also need a flag 
+    }
+
     private void dfs(int i, int j, StringBuilder sb) {
         if (i < 0 || i >= n || j < 0 || j >= m || grid[i][j] == 0) return;
         grid[i][j] = 0; // use as visited 

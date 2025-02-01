@@ -5,10 +5,10 @@ class Solution {
         UnionFind uf = new UnionFind(n);
         for(int[] e : edges){
             int p = e[0], q = e[1];
-            if(uf.find(p, q)) return false; //means there is loop in the graph, so it is not a tree
+            if(uf.find(p, q)) return false; //means there is loop in the graph(it is already in one unio), so it is not a tree
             else uf.union(p,q);
         }
-        return uf.size == 1;
+        return uf.size == 1; //check the whether there is just one root. there is another corner case: a single cluster outside the tree
     }
     class UnionFind{
         private int[] sz;
@@ -16,9 +16,9 @@ class Solution {
         public int size; //# of the clustered node 
         public UnionFind(int n){
             size = n;
-            parent = new int[n];
+            parent = new int[n]; 
             sz = new int[n];
-            for(int i = 0; i < n; i++){
+            for(int i = 0; i < n; i++){ //initial status: the parent of each node is itself. each cluster's size is 1
                 parent[i] = i;
                 sz[i] = 1;
             }

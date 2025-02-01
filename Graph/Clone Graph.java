@@ -1,3 +1,4 @@
+//use hashmap to store the original node and the copy node. then traverse the neighbors using queue to build the relationship for the copy nodes
 class Solution {
     public Node cloneGraph(Node node) {
         if(node == null) return null;

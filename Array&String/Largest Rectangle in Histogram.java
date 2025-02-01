@@ -1,4 +1,10 @@
+
 // solution1: looking for idx i's the first smaller element on left and right side. Elements's value in stack is decreasing
+
+//using stack to use the left boundry and the right boundry 
+//if stack is not empty then stack.peek() is the gratest element in the stack. if the incoming element is larger than the peek element. we keep pushing it into the stack
+//when the new element is smaller than the peek() then process the hisyogram from the highest 
+
 class Solution {
     public int largestRectangleArea(int[] heights) {
         if (heights == null || heights.length == 0) return 0;
