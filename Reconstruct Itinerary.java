@@ -1,6 +1,6 @@
 // Eulerian cycle: dfs backtrace 
 class Solution {
-    HashMap<String, PriorityQueue<String>> map;
+    HashMap<String, PriorityQueue<String>> map; // using HashMap to build graph; using PQ due to the requirement 
     List<String> res;
     public List<String> findItinerary(List<List<String>> tickets) {
         res = new ArrayList<>();
@@ -13,7 +13,7 @@ class Solution {
         }
         
         dfs("JFK");
-        Collections.reverse(res);
+        Collections.reverse(res); // we need to reverse the order bc we visit the stop reversely 
         return res;
     }
 
