@@ -26,7 +26,8 @@ class Solution {
         Arrays.sort(people, (a, b) -> (a[0] == b[0] ? b[1] - a[1] : a[0] - b[0]));
         int[][] res = new int[N][2];
         for (int[] p : people) {
-            int idx = query(0, 0, N - 1, p[1] + 1);
+            int idx = query(0, 0, N - 1, p[1] + 1); // Why we need to find the (k+1)th available slot? 
+            // Because [n, k] means, there will be k higher people in front of me. Since the people is sorted from low to high, so I have to leave k empty slot for the future candidate (which are higher than me). Thus, the current element sits in the (k+1)th available slot. 
             res[idx] = p;
             update(0, 0, N - 1, idx);
         }
