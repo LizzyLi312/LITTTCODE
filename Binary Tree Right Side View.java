@@ -33,3 +33,26 @@ class Solution {
         if(root.left != null) helper(root.left, level + 1);
     }
 }
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        if (root == null) return new ArrayList<>();
+        int[] t = new int[100];
+        Arrays.fill(t, -200);
+        dfs(root, 0, t);
+        
+        List<Integer> res = new ArrayList<>();
+        for (int a : t) {
+            if (a != -200) res.add(a);
+        }
+        return res;
+    }
+
+    private void dfs(TreeNode root, int layer, int[] t) {
+        if (root == null) return;
+        
+        if (t[layer] == -200) t[layer] = root.val;
+        dfs(root.right, layer + 1, t);
+        dfs(root.left, layer + 1, t);
+    }
+}
