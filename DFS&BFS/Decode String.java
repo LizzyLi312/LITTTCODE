@@ -36,3 +36,39 @@ class Solution {
         return res;
     }
 }
+
+// solution2
+class Solution {
+    public String decodeString(String s) {
+        if (s == null || s.length() == 0) return "";
+
+        StringBuilder sb = new StringBuilder();
+        Stack<Integer> num = new Stack<>();
+        Stack<String> str = new Stack<>(); // store the previous string
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) { 
+                int idx = i + 1;
+                while (idx < s.length() && Character.isDigit(s.charAt(idx))) idx++;
+                String t = s.substring(i, idx);
+                num.push(Integer.valueOf(t));
+                i = idx - 1;
+            } else if (Character.isLetter(c)) {
+                int idx = i + 1;
+                while (idx < s.length() && Character.isLetter(s.charAt(idx))) idx++;
+                sb.append(s.substring(i, idx));
+                i = idx - 1;
+            } else if (c == '[') { // when there is a [ means there is a new nest so we need to store the previous string
+                str.push(sb.toString());
+                sb = new StringBuilder();
+            } else if (c == ']') { // if there is a ] means we finished this nest so we need to duplicate the string that is inside of the [] which is store in sb and also the number before it
+                StringBuilder temp = new StringBuilder(str.pop()); // we do not need to check since there is string is always valid 
+                int times = num.pop();
+                while (times-- > 0) temp.append(sb);
+                sb = new StringBuilder(temp);
+            }
+        }
+        return sb.toString();
+    }
+}
