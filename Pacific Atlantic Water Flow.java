@@ -51,3 +51,44 @@ class Solution {
 }
 
 //use BFS. Time: O(n*m + m + n) -> O(m*n) space:O(m*n) 
+
+// solution2 dfs
+class Solution {
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        if (heights == null || heights.length == 0 || heights[0] == null || heights[0].length == 0) return new ArrayList<>();
+
+        int n = heights.length, m = heights[0].length;
+        
+        boolean[][] pacVisited = new boolean[n][m];
+        boolean[][] atlVisited = new boolean[n][m];
+
+        for (int i = 0; i < m; i++) dfs(pacVisited, 0, i, heights); // top row
+        for (int i = 0; i < n; i++) dfs(pacVisited, i, 0, heights); // left column
+        for (int i = 0; i < m; i++) dfs(atlVisited, n - 1, i, heights); // right column
+        for (int i = 0; i < n; i++) dfs(atlVisited, i, m - 1, heights); // bottom row 
+
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (pacVisited[i][j] && atlVisited[i][j]) {
+                    List<Integer> t = new ArrayList<>();
+                    t.add(i);
+                    t.add(j);
+                    res.add(t);
+                }
+            }
+        }
+        return res;
+    }
+
+    private void dfs(boolean[][] visited, int x, int y, int[][] h) {
+        int[][] dirs = new int[][]{{0, -1}, {1, 0}, {-1, 0}, {0, 1}};
+
+        visited[x][y] = true;
+        for (int[] dir : dirs) {
+            int a = dir[0] + x, b = dir[1] + y;
+            if (a < 0 || b < 0 || a >= visited.length || b >= visited[0].length || h[x][y] > h[a][b] || visited[a][b]) continue;
+            dfs(visited, a, b, h);
+        }
+    }
+}
