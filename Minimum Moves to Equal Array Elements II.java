@@ -41,3 +41,20 @@ class Solution {
         nums[b] = t;
     }
 }
+
+// solution2 mahattan distance 
+class Solution {
+    public int minMoves2(int[] nums) { 
+        // odd - dis = (x - a) + (x - b) + (c - c) + (d - x) + (e - x) = (d + e) - (a + b)
+        // even - dis = (x - a) + ((c + b) / 2 - b) + (c - (c + b) / 2) + (d - x) = (c + d) - (a + b)
+        if (nums == null || nums.length <= 1) return 0;
+
+        int left = 0, right = nums.length - 1;
+        int res = 0;
+        Arrays.sort(nums);
+        while (left < right) {
+            res += nums[right--] - nums[left++]; //0,3 -> 1, 2 -> 2, 3|| 0, 4 -> 1, 3 -> 2, 2
+        }
+        return res;
+    }
+}
