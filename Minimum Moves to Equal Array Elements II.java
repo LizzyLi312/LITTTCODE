@@ -3,7 +3,7 @@ class Solution {
     public int minMoves2(int[] nums) {
         if (nums == null || nums.length <= 1) return 0;
 
-        int med = quickSelect(nums, 0, nums.length - 1, nums.length / 2);
+        int med = quickSelect(nums, 0, nums.length - 1, nums.length / 2 + 1);
         int res = 0;
         for (int num : nums) {
             res += Math.abs(num - med);
@@ -11,28 +11,17 @@ class Solution {
         return res;
     }
 
-    private int quickSelect(int[] nums, int left, int right, int k) { // find a pivot and compare the pivot's index with k
-        if (left == right) return nums[left];
-
-        int pivot = left + (right - left) / 2;
-
-        pivot = partition(nums, left, right, pivot); 
-
-        if (pivot == k) return nums[k];
-        else if (pivot < k) return quickSelect(nums, pivot + 1, right, k);
-        return quickSelect(nums, left, pivot - 1, k);
-    }
-
-    private int partition(int[] nums, int left, int right, int p) {
-        int pivot = nums[p];
-
-        swap(nums, p, right);
-        
-        int j = left;
-        for (int i = left; i <= right; i++) {
-            if (nums[i] <= pivot) swap(nums, i, j++);
+    private int quickSelect(int[] nums, int left, int right, int k) {
+        if (left >= right) return nums[right];
+        int pivot = nums[left + (right - left) / 2], i = left - 1, j = right + 1; // need to cache the pivot actual value 
+        while (i < j) {
+            while (nums[++i] < pivot);
+            while (nums[--j] > pivot);
+            if (i < j) swap(nums, i, j);
         }
-        return j - 1;
+        int cnt = j - left + 1;
+        if (k <= cnt) return quickSelect(nums, left, j, k);
+        return quickSelect(nums, j + 1, right, k - cnt);
     }
 
     private void swap(int[] nums, int a, int b) {
@@ -41,7 +30,6 @@ class Solution {
         nums[b] = t;
     }
 }
-
 // solution2 mahattan distance 
 class Solution {
     public int minMoves2(int[] nums) { 
