@@ -1,0 +1,29 @@
+class Solution {
+    public int minMoves(int[] nums, int k) {
+        // other 1s dis from 1 at x-idx: (x - a) + (x - b) + (c - x) + (d - x) = Min((c + d) - (a + b)) -> Min(disLeft + disRight)
+        // disLeft = 2x - (a + b), disRight = (c + d) - 2x 
+        // corner case 
+        List<Integer> pos = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) pos.add(i - pos.size()); // if there is a 1 between the 1st 1 and the 3rd one then we will need dis(1st, 3st) - 1 since there is a 1 between 
+        }
+
+        int[] sum = new int[pos.size() + 1];
+        for (int i = 1; i < pos.size() + 1; i++) { //prefix sum for the distance 
+            sum[i] = sum[i - 1] + pos.get(i - 1);
+        }
+
+        int res = Integer.MAX_VALUE;
+        for (int i = 1; i + k - 1 <= pos.size(); i++) {
+            int l = i, r = i + k - 1; // 1(0),1(1),1(2), k = 3
+            int mid = l + (r - l) / 2;
+            int x = pos.get(mid - 1);
+            // l, mid - 1
+            int left = x * (mid - 1 - l + 1) - (sum[mid - 1] - sum[l - 1]);
+            // mid + 1, right
+            int right = (sum[r] - sum[mid + 1 - 1]) - x * (r - (mid + 1) + 1); 
+            res = Math.min(res, left + right);
+        }
+        return res;
+    }
+}
