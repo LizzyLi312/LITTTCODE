@@ -1,5 +1,6 @@
 // math issue:
 // 3 steps: find break point from the right -> find the first element that is bigger than the break point -> reverse it from the next element of the break points to the end 
+// https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
 class Solution {
     public void nextPermutation(int[] nums) {
         int idx1 = -1;
