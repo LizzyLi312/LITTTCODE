@@ -1,3 +1,20 @@
+//solution1: brutal force TLE
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        if (text1 == null || text2 == null || text1.length() == 0 || text2.length() == 0) return 0;
+
+        return longestCommonSubsequence(text1, 0, text2, 0);
+    }
+
+    private int longestCommonSubsequence(String s1, int idx1, String s2, int idx2) {
+        if (idx1 == s1.length() || idx2 == s2.length()) return 0;
+
+        if (s1.charAt(idx1) == s2.charAt(idx2)) return 1 + longestCommonSubsequence(s1, idx1 + 1, s2, idx2 + 1);
+        else return Math.max(longestCommonSubsequence(s1, idx1 + 1, s2, idx2), longestCommonSubsequence(s1, idx1, s2, idx2 + 1));
+    }
+}
+
+// solution2 : dp
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         if (text1 == null || text2 == null || text1.length() == 0 || text2.length() == 0) return 0;
