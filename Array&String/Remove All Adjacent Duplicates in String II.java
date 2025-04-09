@@ -1,4 +1,4 @@
-// 2 pointers, [0, i] result, [i, j]
+// 2 pointers, [0, i] result, (i, j) abondoned, [j, s.length()) we need to check
 class Solution {
     public String removeDuplicates(String s, int k) {
         if (s == null || s.length() < k) return s;
