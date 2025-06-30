@@ -7,7 +7,7 @@ class Solution {
             int start = i + 1, end = nums.length - 1;
             while(start < end){
                 if(nums[i] + nums[start] + nums[end] < target){
-                    res += end - start; //all the end will satisfy the condition 
+                    res += end - start; //all elements between start and end will satisfy the condition since they are smaller than end element
                     start++;
                 }
                 else end--;
